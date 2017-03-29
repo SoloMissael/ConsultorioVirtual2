@@ -6,7 +6,11 @@
 package Ventanas;
 
 import Clases.Usuarios;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
+import Clases.conectar;
 
 
 public class Registro extends javax.swing.JFrame {
@@ -160,7 +164,33 @@ public class Registro extends javax.swing.JFrame {
             usuarios=new Usuarios(tipo, nombre, segundoNombre, apellidoPaterno, apellidoMaterno, Contraseña);
             //enviarlo a la bd
         }
-        
+         String f = "4";//se tiene que camibiar tenemos que modificar esto !
+        //conexion
+        conectar cc=new conectar();
+    Connection cn=cc.conexion();
+  
+        try{
+            
+            PreparedStatement pst=cn.prepareStatement("INSERT INTO usuarios(id_usuario,tipo_usuario ,nombre,segundo_nombre,apellido_paterno,apellido_materno,contraseña) VALUES(?,?,?,?,?,?,?)");
+            pst.setString(1,f);
+            pst.setString(2,tipo);
+            pst.setString(3,nombre);
+            pst.setString(4,segundoNombre);
+            pst.setString(5,apellidoPaterno);
+            pst.setString(6,apellidoMaterno);
+            pst.setString(7,Contraseña2);
+            
+     int a=pst.executeUpdate();
+      if(a>0){
+            JOptionPane.showMessageDialog(null,"Registro exitoso");
+             mostrardatos("");
+        }
+        else{
+             JOptionPane.showMessageDialog(null,"Error al agregar");
+        }
+         
+        }catch(Exception e){
+        }
     }//GEN-LAST:event_btnAceptarMouseClicked
 
     /**
@@ -223,4 +253,8 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtSegundoNombre;
     // End of variables declaration//GEN-END:variables
+
+    private void mostrardatos(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
