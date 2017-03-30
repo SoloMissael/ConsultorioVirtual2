@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 import Clases.conectar;
+import java.sql.ResultSet;
 
 
 public class Registro extends javax.swing.JFrame {
@@ -22,6 +23,9 @@ public class Registro extends javax.swing.JFrame {
     String apellidoMaterno;
     String Contraseña;
     String Contraseña2;
+     //conexion
+        conectar cc=new conectar();
+        Connection cn=cc.conexion();
     
     public Registro() {
         initComponents();
@@ -164,16 +168,12 @@ public class Registro extends javax.swing.JFrame {
             usuarios=new Usuarios(tipo, nombre, segundoNombre, apellidoPaterno, apellidoMaterno, Contraseña);
             //enviarlo a la bd
         }
-         String f = "4";//se tiene que camibiar tenemos que modificar esto !
-        //conexion
-        conectar cc=new conectar();
-        Connection cn=cc.conexion();
-            
-            
+         String registros = getRowNumber()+"";//se tiene que camibiar tenemos que modificar esto !
+        
         try{
             
             PreparedStatement pst=cn.prepareStatement("INSERT INTO usuarios(id_usuario,tipo_usuario ,nombre,segundo_nombre,apellido_paterno,apellido_materno,contraseña) VALUES(?,?,?,?,?,?,?)"); 
-            pst.setString(1,f);
+            pst.setString(1,registros);
             pst.setString(2,tipo);
             pst.setString(3,nombre);
             pst.setString(4,segundoNombre);
@@ -193,7 +193,21 @@ public class Registro extends javax.swing.JFrame {
         }catch(Exception e){
         }
     }//GEN-LAST:event_btnAceptarMouseClicked
-
+    //ID
+    public int getRowNumber(){
+   int numberRow = 0;
+        try{
+             String query = "select count(*) from usuarios";
+             PreparedStatement st = cn.prepareStatement(query);
+             ResultSet rs = st.executeQuery();
+             while(rs.next()){
+               numberRow = rs.getInt("count(*)");
+                }
+        }catch (Exception ex){
+                System.out.println(ex.getMessage());
+          }
+        return numberRow+1;
+     }
     /**
      * @param args the command line arguments
      */
@@ -258,4 +272,6 @@ public class Registro extends javax.swing.JFrame {
     private void mostrardatos(String string) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+ 
 }

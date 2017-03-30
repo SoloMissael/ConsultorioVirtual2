@@ -25,6 +25,6 @@ public Connection conexion(){
              JOptionPane.showMessageDialog(null, "Error de conexion de la base de datos");
    }
   catch(ClassNotFoundException ex) {   }
-  return conectar;
-}
+        return conectar;
+    }
 }
