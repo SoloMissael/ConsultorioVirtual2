@@ -167,11 +167,12 @@ public class Registro extends javax.swing.JFrame {
          String f = "4";//se tiene que camibiar tenemos que modificar esto !
         //conexion
         conectar cc=new conectar();
-    Connection cn=cc.conexion();
-  
+        Connection cn=cc.conexion();
+            
+            
         try{
             
-            PreparedStatement pst=cn.prepareStatement("INSERT INTO usuarios(id_usuario,tipo_usuario ,nombre,segundo_nombre,apellido_paterno,apellido_materno,contraseña) VALUES(?,?,?,?,?,?,?)");
+            PreparedStatement pst=cn.prepareStatement("INSERT INTO usuarios(id_usuario,tipo_usuario ,nombre,segundo_nombre,apellido_paterno,apellido_materno,contraseña) VALUES(?,?,?,?,?,?,?)"); 
             pst.setString(1,f);
             pst.setString(2,tipo);
             pst.setString(3,nombre);
