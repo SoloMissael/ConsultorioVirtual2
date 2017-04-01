@@ -17,8 +17,9 @@ import javax.swing.Timer;
  * @author Carlos Puga
  */
 public class Principal1 extends javax.swing.JFrame {
-         conectar cc=new conectar();
+        /*conectar cc=new conectar();
         Connection cn=cc.conexion();
+    */
     /**
      * Creates new form Principal1
      */
@@ -26,9 +27,9 @@ public class Principal1 extends javax.swing.JFrame {
     public Principal1() {
         initComponents();
         setLocationRelativeTo(null);
-        t = new Timer(3000, (ActionListener) this);
+        /*t = new Timer(3000, (ActionListener) this);
         t.start();
-       
+       */
     }
 
     @SuppressWarnings("unchecked")
@@ -92,31 +93,6 @@ public class Principal1 extends javax.swing.JFrame {
         
     }
     
-    public int getRowNumber(){
-    int numberRow = 0;
-        try{
-             String query = "select count(*) from usuarios";
-             PreparedStatement st = cn.prepareStatement(query);
-             ResultSet rs = st.executeQuery();
-             while(rs.next()){
-               numberRow = rs.getInt("count(*)");
-                }
-        }catch (Exception ex){
-                System.out.println(ex.getMessage());
-          }
-        return numberRow;
-     }
-    public void verificacionUsuarios(){
-        int row = getRowNumber();
-        if(row == 0){
-            Registro r = new Registro();
-            r.setVisible(true);
-        }
-        else{
-            Login login = new Login();
-            login.setVisible(true);
-        }
-    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -147,15 +123,6 @@ public class Principal1 extends javax.swing.JFrame {
                 new Principal1().setVisible(true);
             }
         });
-        /*try{
-            Thread.sleep(3000);
-             verificacionUsuarios();
-        }
-        catch(InterruptedException ex){ }*/
-        //Verificar si hay datos en la bd para ver que pantalla  se abrira
-        
-        
-        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
