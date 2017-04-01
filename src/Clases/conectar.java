@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Clases;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -26,5 +27,15 @@ public Connection conexion(){
    }
   catch(ClassNotFoundException ex) {   }
         return conectar;
+    }
+
+    public void txtApMatKeyTyped(KeyEvent evt) {
+    }
+
+    public void txtApMatKeyReleased(KeyEvent evt) {
+    }
+    //ID
+
+    public void txtApMatKeyPressed(KeyEvent evt) {
     }
 }

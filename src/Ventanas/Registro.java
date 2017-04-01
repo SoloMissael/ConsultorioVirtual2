@@ -113,13 +113,31 @@ public class Registro extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, 120, 30));
+
+        txtApMat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtApMatKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtApMat, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 250, -1));
+
+        txtApPat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtApPatKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtApPat, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 250, -1));
+
+        txtSegundoNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSegundoNombreKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtSegundoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 250, -1));
 
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNombreKeyReleased(evt);
             }
         });
         getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 250, -1));
@@ -144,10 +162,6 @@ public class Registro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
-
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         boolean estado = true;
         tipo=cmbUsuarios.getSelectedItem().toString();
@@ -170,7 +184,28 @@ public class Registro extends javax.swing.JFrame {
         }
         insertar(tipo, nombre, segundoNombre, apellidoPaterno, apellidoMaterno, Contraseña);
     }//GEN-LAST:event_btnAceptarMouseClicked
-    //ID
+
+    private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
+        String temp = txtNombre.getText();
+        txtNombre.setText(temp.toUpperCase());
+    }//GEN-LAST:event_txtNombreKeyReleased
+
+    private void txtApPatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApPatKeyReleased
+        String temp = txtApPat.getText();
+        txtApPat.setText(temp.toUpperCase());
+    }//GEN-LAST:event_txtApPatKeyReleased
+
+    private void txtSegundoNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegundoNombreKeyReleased
+        String temp = txtSegundoNombre.getText();
+        txtSegundoNombre.setText(temp.toUpperCase());
+    }//GEN-LAST:event_txtSegundoNombreKeyReleased
+
+    private void txtApMatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApMatKeyReleased
+        String temp = txtApMat.getText();
+        txtApMat.setText(temp.toUpperCase());
+    }//GEN-LAST:event_txtApMatKeyReleased
+    
+    
 
     /**
      * @param args the command line arguments
