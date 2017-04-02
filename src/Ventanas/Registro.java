@@ -11,7 +11,9 @@ import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 import Clases.conectar;
+import java.awt.HeadlessException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 
 public class Registro extends javax.swing.JFrame {
@@ -31,6 +33,7 @@ public class Registro extends javax.swing.JFrame {
         initComponents();
         setTitle("Registro de usuario");
         setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -66,7 +69,7 @@ public class Registro extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel15.setText("Escriba los datos de usuario que desea registrar");
@@ -172,19 +175,43 @@ public class Registro extends javax.swing.JFrame {
         Contraseña=pswContra1.getText();
         Contraseña2=pswContra2.getText();
         
-        if(nombre.equals(null)){showMessageDialog(null,"Error");
-        estado=false;}
-        if(apellidoPaterno.equals(null)){showMessageDialog(null,"Error");
-        estado=false;}
-        if(Contraseña.equals(null)||Contraseña2.equals(null)){showMessageDialog(null,"Error");
-        estado=false;}
-        if(estado=true){
-            usuarios=new Usuarios(tipo, nombre, segundoNombre, apellidoPaterno, apellidoMaterno, Contraseña);
-            //enviarlo a la bd
+        if(nombre.equals("")){
+            showMessageDialog(null, "Ingrese un nombre");
+            estado=false;
+            return;
         }
-        insertar(tipo, nombre, segundoNombre, apellidoPaterno, apellidoMaterno, Contraseña);
+        if(apellidoPaterno.equals("")){
+            showMessageDialog(null, "Ingrese un apellido");
+            estado=false;
+            return;
+        }
+        if(Contraseña.equals("")||Contraseña2.equals("")){
+            showMessageDialog(null, "Ingrese una contraseña");
+            estado=false;
+            return;
+        }
+        if(!Contraseña.equals(Contraseña2)){
+                showMessageDialog(null, "Las contraseñas no coinciden");
+                estado=false;
+                return;
+            }
+        if(cmbUsuarios.getSelectedIndex()==0){
+            showMessageDialog(null, "Seleccione un tipo");
+            estado=false;
+            return;
+        }
+        
+        
+        if(estado==true){
+            insertar(tipo, nombre, segundoNombre, apellidoPaterno, apellidoMaterno, Contraseña);
+            this.dispose();
+            //Abrir pantalla de login
+        }else{
+            showMessageDialog(null, "Error en los datos");
+        }
     }//GEN-LAST:event_btnAceptarMouseClicked
-
+//mouseclicked
+    
     private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
         String temp = txtNombre.getText();
         txtNombre.setText(temp.toUpperCase());
@@ -205,8 +232,6 @@ public class Registro extends javax.swing.JFrame {
         txtApMat.setText(temp.toUpperCase());
     }//GEN-LAST:event_txtApMatKeyReleased
     
-    
-
     /**
      * @param args the command line arguments
      */
@@ -296,11 +321,11 @@ public class Registro extends javax.swing.JFrame {
         else{
              JOptionPane.showMessageDialog(null,"Error al agregar");
         }
-        }catch(Exception e){
+        }catch(HeadlessException | SQLException e){
         }
  }//insertar
  
- public int getRowNumber(){
+public int getRowNumber(){
    int numberRow = 0;
         try{
              String query = "select count(*) from usuarios";
@@ -309,10 +334,10 @@ public class Registro extends javax.swing.JFrame {
              while(rs.next()){
                numberRow = rs.getInt("count(*)");
                 }
-        }catch (Exception ex){
+        }catch (SQLException ex){
                 System.out.println(ex.getMessage());
           }
         return numberRow;
-}//getRowNumber
+}//getRowNumber  
  
 }//class

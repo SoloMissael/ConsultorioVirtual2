@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Ventanas;
 import Clases.conectar;
 import java.awt.event.ActionEvent;
@@ -10,27 +5,29 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import org.omg.CORBA.ORB;
 
-/**
- *
- * @author Carlos Puga
- */
 public class Principal1 extends javax.swing.JFrame {
-        /*conectar cc=new conectar();
-        Connection cn=cc.conexion();
-    */
-    /**
-     * Creates new form Principal1
-     */
-        Timer t = null;
-    public Principal1() {
+    Registro r = new Registro();
+    
+    public Principal1(){
+        
         initComponents();
         setLocationRelativeTo(null);
-        /*t = new Timer(3000, (ActionListener) this);
-        t.start();
-       */
+        if(r.getRowNumber()==0){
+            r.setVisible(true); 
+        }
+        
+        else{
+            new Login().setVisible(true);
+        }
+        
     }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -45,7 +42,7 @@ public class Principal1 extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -86,14 +83,10 @@ public class Principal1 extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    public void actionPerformed(ActionEvent e){
-        if(e.getSource()== t){
-        dispose();
-        }
-        
+    public void actionPerformed(ActionEvent e){   
     }
     
-    public static void main(String args[]) {
+    public static void main(String args[]) throws InterruptedException{
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -120,9 +113,10 @@ public class Principal1 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Principal1().setVisible(true);
+                new Principal1().setVisible(false);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -135,4 +129,9 @@ public class Principal1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
-}
+
+
+ 
+    
+  
+}//class
