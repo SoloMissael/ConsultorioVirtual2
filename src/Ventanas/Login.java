@@ -1,18 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Ventanas;
 
-/**
- *
- * @author carlo
- */
+import Clases.conectar;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 public class Login extends javax.swing.JFrame {
 
-    String usuario;
+    String usuario = "";
     String contraseña;
+    conectar cc=new conectar();
+    Connection cn=cc.conexion();
     public Login() {
         initComponents();
         setTitle("Login");
@@ -63,6 +65,11 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 470, 130));
 
         jButton1.setText("Entrar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, 90, 40));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -103,6 +110,10 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        JOptionPane.showMessageDialog(null,login(txtUsuario.getText(),pswContraseña.getText()));
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -156,4 +167,37 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField pswContraseña;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
-}
+
+public String login(String nombre, String contraseña){
+    String nombres="";
+    String contraseñas="";
+    String tipos="";
+    usuario="";
+    try{
+                 String query = "select * from usuarios";
+                 PreparedStatement st = cn.prepareStatement(query);
+                 ResultSet rs = st.executeQuery();
+                 while(rs.next()){
+                    nombres += rs.getString("nombre")+" "+
+                           rs.getString("apellido_paterno")+",";
+                    contraseñas+=rs.getString("contraseña")+",";
+                    tipos+=rs.getString("tipo_usuario")+",";
+                    }
+            }catch (SQLException ex){
+                    System.out.println(ex.getMessage());
+              }
+     String nombresArr[]=nombres.split(",");
+     String contraseñasArr[]=contraseñas.split(",");
+     String tiposArr[]=tipos.split(",");
+     for(int i=0;i<nombresArr.length;i++){
+         if(nombre.equals(nombresArr[i])&&contraseña.equals(contraseñasArr[i])){
+             return tiposArr[i];
+         }
+     }
+     
+    return "USUARIO O CONTRASEÑA NO VALIDO";
+}//login
+
+
+
+}//class

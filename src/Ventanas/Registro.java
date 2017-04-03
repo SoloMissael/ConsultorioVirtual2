@@ -81,7 +81,7 @@ public class Registro extends javax.swing.JFrame {
         jLabel7.setText("Tipo de usuario");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, -1, -1));
 
-        cmbUsuarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un usuario", "Doctor", "Asistente", " " }));
+        cmbUsuarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un usuario", "DOCTOR", "ASISTENTE", " " }));
         getContentPane().add(cmbUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, -1, -1));
 
         jLabel2.setText("Segundo nombre");
@@ -205,7 +205,8 @@ public class Registro extends javax.swing.JFrame {
         if(estado==true){
             insertar(tipo, nombre, segundoNombre, apellidoPaterno, apellidoMaterno, Contraseña);
             this.dispose();
-            //Abrir pantalla de login
+            Login l = new Login();
+            l.setVisible(true);
         }else{
             showMessageDialog(null, "Error en los datos");
         }
@@ -297,47 +298,47 @@ public class Registro extends javax.swing.JFrame {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
- public void insertar(String tipo_usuario,String nombre,String segundo_nombre,
-            String apellido_paterno,String apellido_materno,String contraseña){
-     
-     String id = getRowNumber()+1+"";   
-        try{
-            PreparedStatement pst=cn.prepareStatement("INSERT INTO usuarios"
-     + "(id_usuario,tipo_usuario ,nombre,segundo_nombre,apellido_paterno,"
-     + "apellido_materno,contraseña) VALUES(?,?,?,?,?,?,?)"); 
-            pst.setString(1,id);
-            pst.setString(2,tipo);
-            pst.setString(3,nombre);
-            pst.setString(4,segundoNombre);
-            pst.setString(5,apellidoPaterno);
-            pst.setString(6,apellidoMaterno);
-            pst.setString(7,Contraseña2);
-            
-     int a=pst.executeUpdate();
-      if(a>0){
-            JOptionPane.showMessageDialog(null,"Registro exitoso");
-             //mostrardatos("");
-        }
-        else{
-             JOptionPane.showMessageDialog(null,"Error al agregar");
-        }
-        }catch(HeadlessException | SQLException e){
-        }
- }//insertar
+    public void insertar(String tipo_usuario,String nombre,String segundo_nombre,
+               String apellido_paterno,String apellido_materno,String contraseña){
+
+        String id = getRowNumber()+1+"";   
+           try{
+               PreparedStatement pst=cn.prepareStatement("INSERT INTO usuarios"
+        + "(id_usuario,tipo_usuario ,nombre,segundo_nombre,apellido_paterno,"
+        + "apellido_materno,contraseña) VALUES(?,?,?,?,?,?,?)"); 
+               pst.setString(1,id);
+               pst.setString(2,tipo);
+               pst.setString(3,nombre);
+               pst.setString(4,segundoNombre);
+               pst.setString(5,apellidoPaterno);
+               pst.setString(6,apellidoMaterno);
+               pst.setString(7,Contraseña2);
+
+        int a=pst.executeUpdate();
+         if(a>0){
+               JOptionPane.showMessageDialog(null,"Registro exitoso");
+                //mostrardatos("");
+           }
+           else{
+                JOptionPane.showMessageDialog(null,"Error al agregar");
+           }
+           }catch(HeadlessException | SQLException e){
+           }
+    }//insertar
  
-public int getRowNumber(){
-   int numberRow = 0;
-        try{
-             String query = "select count(*) from usuarios";
-             PreparedStatement st = cn.prepareStatement(query);
-             ResultSet rs = st.executeQuery();
-             while(rs.next()){
-               numberRow = rs.getInt("count(*)");
-                }
-        }catch (SQLException ex){
-                System.out.println(ex.getMessage());
-          }
-        return numberRow;
-}//getRowNumber  
+    public int getRowNumber(){
+       int numberRow = 0;
+            try{
+                 String query = "select count(*) from usuarios";
+                 PreparedStatement st = cn.prepareStatement(query);
+                 ResultSet rs = st.executeQuery();
+                 while(rs.next()){
+                   numberRow = rs.getInt("count(*)");
+                    }
+            }catch (SQLException ex){
+                    System.out.println(ex.getMessage());
+              }
+            return numberRow;
+    }//getRowNumber  
  
 }//class

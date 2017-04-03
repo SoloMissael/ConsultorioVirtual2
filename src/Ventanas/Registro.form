@@ -60,8 +60,8 @@
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
             <StringItem index="0" value="Seleccione un usuario"/>
-            <StringItem index="1" value="Doctor"/>
-            <StringItem index="2" value="Asistente"/>
+            <StringItem index="1" value="DOCTOR"/>
+            <StringItem index="2" value="ASISTENTE"/>
             <StringItem index="3" value=" "/>
           </StringArray>
         </Property>
