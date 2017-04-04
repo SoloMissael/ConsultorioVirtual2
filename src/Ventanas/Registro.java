@@ -201,7 +201,7 @@ public class Registro extends javax.swing.JFrame {
             return;
         }
         
-        if((validarUsuario(tipo, nombre, segundoNombre, apellidoPaterno, apellidoMaterno))==true){
+        if((validarUsuario(nombre, segundoNombre, apellidoPaterno, apellidoMaterno))==true){
              if(estado==true){
                     insertar(tipo, nombre, segundoNombre, apellidoPaterno, apellidoMaterno, Contraseña);
                     this.dispose();
@@ -348,70 +348,40 @@ public class Registro extends javax.swing.JFrame {
     }//getRowNumber  
  
     
-    public boolean validarUsuario(String tipo_usuario,String nombre,String segundo_nombre,
+    public boolean validarUsuario(String nombre,String segundo_nombre,
                String apellido_paterno,String apellido_materno){
-     showMessageDialog(null,"ENTRO VALIDAR");
-       try{
-           String query = "select count(*) from usuarios";
+        boolean estado = true;
+        String nombreTemp="";
+        String segNombre="";
+        String apPat="";
+        String apMat="";
+        try{
+           String query = "select * from usuarios";
             PreparedStatement st = cn.prepareStatement(query);
             ResultSet rs = st.executeQuery();
             
             while(rs.next()){
-                //si no tiene segundo nombre  o ape materno
-                if((rs.getString("segundo_nombre").length()==0) && (rs.getString("apellido_materno").length()==0)){
-                    
-                  showMessageDialog(null,"ENTRO validar");
-                    if(rs.getString("nombre").equals(nombre)){
-                        if(rs.getString("apellido_paterno").equals(apellido_paterno)){
-                                    return false;
-                                    
-                        }
-                    }
-                    
-                }//if sin ambos
-                
-                if((rs.getString("segundo_nombre").length()==0)){
-                    
-                    if(rs.getString("nombre").equals(nombre)){
-                        if(rs.getString("apellido_paterno").equals(apellido_paterno)){
-                            if(rs.getString("apellido_materno").equals(apellido_materno)){
-                                
-                                    return false;
-                                
-                            } 
-                        }
-                    }
-                    
-                }//sin segundo nombre
-                
-                if(rs.getString("apellido_materno").length()==0){
-                    
-                    if(rs.getString("nombre").equals(nombre)){
-                        if(rs.getString("segundo_nombre").equals(segundo_nombre)){
-                            if(rs.getString("apellido_paterno").equals(apellido_paterno)){
-                                    return false;
-                            } 
-                        }
-                    }
-                    
-                }//sin apellido materno
-                else
-                    if(rs.getString("nombre").equals(nombre)){
-                        if(rs.getString("segundo_nombre").equals(segundo_nombre)){
-                            if(rs.getString("apellido_paterno").equals(apellido_paterno)){
-                                    if(rs.getString("apellido_materno").equals(apellido_materno)){
-                                    return false;
-                             }
-                            } 
-                        }
-                    }
-                  
+                nombreTemp+=rs.getString("nombre")+",";
+                segNombre+=rs.getString("segundo_nombre")+",";
+                apPat+=rs.getString("apellido_paterno")+",";
+                apMat+=rs.getString("apellido_materno")+",";
             }//while
-       
+            String nombres[]=nombreTemp.split(",");
+            String segundonombre[]=segNombre.split(",");
+            String apPaterno[]=apPat.split(",");
+            String apMaterno []=apMat.split(",");
+            for(int i=0;i<nombres.length;i++){
+                if(nombres[i].equals(nombre)&&
+                        segundonombre[i].equals(segundo_nombre)&&
+                        apPaterno[i].equals(apellido_paterno)&&
+                        apMaterno[i].equals(apellido_materno)){
+                estado=false;
+                }
+            }
        }//try
        catch(SQLException ex){
             System.out.println(ex.getMessage());
        }
-        return true;
-    }
+        return estado;
+    }//validarUsuario
 }//class
