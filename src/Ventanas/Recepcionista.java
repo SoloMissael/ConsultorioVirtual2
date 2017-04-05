@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
+import Ventanas.AgregarPacienteR;
 
 /**
  *
@@ -84,7 +85,7 @@ public class Recepcionista extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         Fondo_Agenda = new javax.swing.JLabel();
         PacientePanel = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        lblAgregarPaciente = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -93,7 +94,7 @@ public class Recepcionista extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaAgenda = new javax.swing.JTable();
         txtBusquedaAgenda = new javax.swing.JTextField();
-        cmbPacientes = new javax.swing.JComboBox<>();
+        cmbPacientes = new javax.swing.JComboBox<String>();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jCalendar1 = new com.toedter.calendar.JCalendar();
@@ -154,14 +155,19 @@ public class Recepcionista extends javax.swing.JFrame {
         });
         PacientePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/NuevaCita_32.png"))); // NOI18N
-        jLabel6.setText("Agregar Paciente");
-        jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        PacientePanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        lblAgregarPaciente.setBackground(new java.awt.Color(255, 255, 255));
+        lblAgregarPaciente.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblAgregarPaciente.setForeground(new java.awt.Color(255, 255, 255));
+        lblAgregarPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/NuevaCita_32.png"))); // NOI18N
+        lblAgregarPaciente.setText("Agregar Paciente");
+        lblAgregarPaciente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblAgregarPaciente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        lblAgregarPaciente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAgregarPacienteMouseClicked(evt);
+            }
+        });
+        PacientePanel.add(lblAgregarPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -211,7 +217,7 @@ public class Recepcionista extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, 910, 310));
         getContentPane().add(txtBusquedaAgenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, 260, 24));
 
-        cmbPacientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una opcion" }));
+        cmbPacientes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione una opcion" }));
         cmbPacientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbPacientesActionPerformed(evt);
@@ -291,6 +297,12 @@ public class Recepcionista extends javax.swing.JFrame {
     private void btnIrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIrMouseClicked
         obtenerFecha();
     }//GEN-LAST:event_btnIrMouseClicked
+
+    private void lblAgregarPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAgregarPacienteMouseClicked
+        AgregarPacienteR ap = new AgregarPacienteR();
+        ap.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_lblAgregarPacienteMouseClicked
     
     /**
      * @param args the command line arguments
@@ -342,12 +354,12 @@ public class Recepcionista extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblAgregarPaciente;
     private javax.swing.JTabbedPane panel;
     private javax.swing.JTextField txtBusquedaAgenda;
     // End of variables declaration//GEN-END:variables

@@ -5,12 +5,24 @@
  */
 package Ventanas;
 
+import Clases.conectar;
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static javax.swing.JOptionPane.showMessageDialog;
+
 /**
  *
  * @author dani_
  */
 public class AgregarPacienteR extends javax.swing.JFrame {
-
+//conexion
+        conectar cc=new conectar();
+        Connection cn=cc.conexion();
     /**
      * Creates new form AgregarPacienteR
      */
@@ -65,6 +77,7 @@ public class AgregarPacienteR extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         lblPacientes = new javax.swing.JLabel();
         lblBarra = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Agregar Paciente");
@@ -92,7 +105,8 @@ public class AgregarPacienteR extends javax.swing.JFrame {
         jLabel7.setText("Codigo Postal");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 481, -1, -1));
 
-        txtNExpediente.setText(" ");
+        txtNExpediente.setEditable(false);
+        txtNExpediente.setText("1");
         getContentPane().add(txtNExpediente, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 174, 79, -1));
 
         txtSNombre.setText(" ");
@@ -178,13 +192,135 @@ public class AgregarPacienteR extends javax.swing.JFrame {
         lblBarra.setText("jLabel16");
         getContentPane().add(lblBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -3, 1090, 130));
 
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo_blanco.jpg"))); // NOI18N
+        jLabel16.setText("jLabel16");
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1090, 410));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
+       try{
+            int NumExpediente= Integer.parseInt(txtNExpediente.getText());
+            String primer_nom = txtPNombre.getText();
+            String segundo_nom = txtSNombre.getText();
+            String ape_pat = txtApePat.getText();
+            String ape_mat = txtApeMat.getText();
+            String domicilio = txtDomicilio.getText();
+            String ciudad = txtCiudad.getText();
+            String estado = txtEstado.getText();
+            String Tel_Dom = txtTelDom.getText();
+            String Tel_Ofi = txtTelOfi.getText();
+            String correo = txtCorreo.getText();
+            String sexo = cmbSexo.getSelectedItem().toString();
+            String Lug_Nac = txtLugarNac.getText();
+            String Fec_Nac = txtFechaNac.getText();
+            int edad = Integer.parseInt(txtEdad.getText());
+            String medico = cmbMedico.getSelectedItem().toString();
+       
+       if(validarCampos(primer_nom,ape_pat,domicilio, ciudad,estado,Tel_Dom,sexo,Lug_Nac,Fec_Nac,2,medico)==true){
+           showMessageDialog(null, "se puede insertar");
+       }else{
+           showMessageDialog(null, "no se puede insertar");
+       }
+       }
+       catch(java.lang.NumberFormatException ex){
+           showMessageDialog(null, "Ingrese Edad ");
+       }
+              
     }//GEN-LAST:event_btnAgregarActionPerformed
 
+    public boolean validarCampos(String nom,String apePat,String domicilio,
+                String ciudad, String estado,String telDom,String sexo,
+                String LugNac,String FechaNac,int edad, String medico){
+    
+        if(nom.equals("")){
+            showMessageDialog(null, "Ingrese el nombre");
+            return false;
+        }
+        if(apePat.equals("")){
+            showMessageDialog(null, "Ingrese un apellido");
+            return false;
+        }
+        if(domicilio.equals("")){
+            showMessageDialog(null, "Ingrese un domicilio");
+            return false;
+        }
+        if(ciudad.equals("")){
+            showMessageDialog(null, "Ingrese un ciudad");
+            return false;
+        }
+        if(estado.equals("")){
+            showMessageDialog(null, "Ingrese un estado");
+            return false;
+        }
+        if(telDom.equals("")){
+            showMessageDialog(null, "Ingrese el telefono de domicilio");
+            return false;
+        }
+        if(sexo.equals("")){
+            showMessageDialog(null, "Ingrese el sexo");
+            return false;
+        }
+        if(LugNac.equals("")){
+            showMessageDialog(null, "Ingrese el Lugar de Naciemiento");
+            return false;
+        }
+        if(FechaNac.equals("")){
+            showMessageDialog(null, "Ingrese la Fecha de Nacimiento");
+            return false;
+        }
+        if(edad<0){
+            showMessageDialog(null, "Ingrese la edad");
+            return false;
+        }
+        if(medico.equals("")){
+            showMessageDialog(null, "Seleccione al medico");
+            return false;
+        }
+        
+        return true;
+        
+    }
+    
+    public void insertarP(int id_Exp,String nom,String seg_nom,String apePat,
+                            String apeMat,String domicilio,String ciudad,
+                            String estado,String telDom,String telOfi,
+                            String correo,String sexo,String LugNac,
+                            String FechaNac,int edad, String medico){
+        String idPaciente = getRowNumber()+"";
+        try{
+            PreparedStatement pst = cn.prepareStatement("INSERT INTO PACIENTE(id_paciente,"
+                    + "id_expediente,nombre_paciente,segnombre_paciente,apepat_paciente,"
+                    + "apemat_paciente,domicilio,ciudad,estado,codigo_postal,telefono_domicilio,"
+                    + "telefono_oficina,correo_electronico,sexo,Lugar_Nac,Fecha_Nac,Edad,Medico)"
+                    + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            pst.setString(1,idPaciente);
+            pst.setString(2,id_Exp+"");
+            pst.setString(3,nom);
+            pst.setString(4,seg_nom);
+           
+        }
+        
+        catch(HeadlessException e){} catch (SQLException ex) {
+                Logger.getLogger(AgregarPacienteR.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
+    
+    public int getRowNumber(){
+       int numberRow = 0;
+            try{
+                 String query = "select count(*) from PACIENTE ";
+                 PreparedStatement st = cn.prepareStatement(query);
+                 ResultSet rs = st.executeQuery();
+                 while(rs.next()){
+                   numberRow = rs.getInt("count(*)");
+                    }
+            }catch (SQLException ex){
+                    System.out.println(ex.getMessage());
+              }
+            return numberRow;
+    }//getRowNumber  
     /**
      * @param args the command line arguments
      */
@@ -231,6 +367,7 @@ public class AgregarPacienteR extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -32,8 +32,8 @@ public class Login extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        btnEntrar = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -59,17 +59,17 @@ public class Login extends javax.swing.JFrame {
         jLabel12.setText("Seleccione su nombre de usuario y escriba su contraseña para ingresar al sistema.");
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 410, 20));
 
-        jLabel13.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel13.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Version 1.0", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153))); // NOI18N
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 470, 130));
-
-        jButton1.setText("Entrar");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnEntrar.setText("Entrar");
+        btnEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                btnEntrarMouseClicked(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, 90, 40));
+        getContentPane().add(btnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, 90, 40));
+
+        jLabel13.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel13.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Version 1.0", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(153, 153, 153)));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 470, 130));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setText("Consultorio");
@@ -102,12 +102,12 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 190, 23));
         getContentPane().add(pswContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 190, 23));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventanas/barra.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/barra.png"))); // NOI18N
         jLabel3.setText("jLabel3");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 80));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventanas/fondo_blanco.jpg"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo_blanco.jpg"))); // NOI18N
         jLabel8.setText("jLabel8");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 490, 280));
 
@@ -117,7 +117,7 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void btnEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntrarMouseClicked
         if(login(txtUsuario.getText(),pswContraseña.getText()).equals("DOCTOR")){
             //ABRIR VENTANA DOCTOR
         }else
@@ -128,7 +128,7 @@ public class Login extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null,"Usuario y/o contraseña no validos");
         }
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_btnEntrarMouseClicked
 
     private void txtUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyReleased
         String temp = txtUsuario.getText();
@@ -171,7 +171,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnEntrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

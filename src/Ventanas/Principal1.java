@@ -46,7 +46,7 @@ public class Principal1 extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventanas/barra.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/barra.png"))); // NOI18N
         jLabel8.setText("jLabel3");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 40));
 
@@ -58,7 +58,7 @@ public class Principal1 extends javax.swing.JFrame {
         jLabel2.setText("Version 1.0");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 380, 80, -1));
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventanas/barra.png"))); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/barra.png"))); // NOI18N
         jLabel9.setText("jLabel3");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 550, 40));
 
@@ -77,7 +77,7 @@ public class Principal1 extends javax.swing.JFrame {
         jLabel7.setText("Virtual");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, -1, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventanas/principal_1.jpg"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/principal-1.jpg"))); // NOI18N
         jLabel3.setText("jLabel3");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 400));
 
