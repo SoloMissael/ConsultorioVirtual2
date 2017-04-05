@@ -5,6 +5,8 @@
  */
 package Ventanas;
 
+import static javax.swing.JOptionPane.showMessageDialog;
+
 /**
  *
  * @author dani_
@@ -65,6 +67,7 @@ public class AgregarPacienteR extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         lblPacientes = new javax.swing.JLabel();
         lblBarra = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Agregar Paciente");
@@ -92,6 +95,7 @@ public class AgregarPacienteR extends javax.swing.JFrame {
         jLabel7.setText("Codigo Postal");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 481, -1, -1));
 
+        txtNExpediente.setEditable(false);
         txtNExpediente.setText(" ");
         getContentPane().add(txtNExpediente, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 174, 79, -1));
 
@@ -178,13 +182,92 @@ public class AgregarPacienteR extends javax.swing.JFrame {
         lblBarra.setText("jLabel16");
         getContentPane().add(lblBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -3, 1090, 130));
 
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo_blanco.jpg"))); // NOI18N
+        jLabel16.setText("jLabel16");
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1090, 410));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
+       
+            int NumExpediente= Integer.parseInt(txtNExpediente.getText());
+             String primer_nom = txtPNombre.getText();
+            String segundo_nom = txtSNombre.getText();
+            String ape_pat = txtApePat.getText();
+            String ape_mat = txtApeMat.getText();
+            String domicilio = txtDomicilio.getText();
+            String ciudad = txtCiudad.getText();
+            String estado = txtEstado.getText();
+            String Tel_Dom = txtTelDom.getText();
+            String Tel_Ofi = txtTelOfi.getText();
+            String correo = txtCorreo.getText();
+            String sexo = cmbSexo.getSelectedItem().toString();
+            String Lug_Nac = txtLugarNac.getText();
+            String Fec_Nac = txtFechaNac.getText();
+            int edad = Integer.parseInt(txtEdad.getText());
+            String medico = cmbMedico.getSelectedItem().toString();
+       
+       if(validarCampos(primer_nom,ape_pat,domicilio, ciudad,estado,Tel_Dom,sexo,Lug_Nac,Fec_Nac,edad,medico)==true){
+           showMessageDialog(null, "se puede insertar");
+       }else{
+           showMessageDialog(null, "no se puede insertar");
+       }
+              
     }//GEN-LAST:event_btnAgregarActionPerformed
 
+    public boolean validarCampos(String nombre,String apePat,String domicilio,
+                String ciudad, String estado,String telDom,String sexo,
+                String LugNac,String FechaNac,int edad, String medico){
+    
+        if(nombre.equals("")){
+            showMessageDialog(null, "Ingrese el nombre");
+            return false;
+        }
+        if(apePat.equals("")){
+            showMessageDialog(null, "Ingrese un apellido");
+            return false;
+        }
+        if(domicilio.equals("")){
+            showMessageDialog(null, "Ingrese un domicilio");
+            return false;
+        }
+        if(ciudad.equals("")){
+            showMessageDialog(null, "Ingrese un ciudad");
+            return false;
+        }
+        if(estado.equals("")){
+            showMessageDialog(null, "Ingrese un estado");
+            return false;
+        }
+        if(telDom.equals("")){
+            showMessageDialog(null, "Ingrese el telefono de domicilio");
+            return false;
+        }
+        if(sexo.equals("")){
+            showMessageDialog(null, "Ingrese el sexo");
+            return false;
+        }
+        if(LugNac.equals("")){
+            showMessageDialog(null, "Ingrese el Lugar de Naciemiento");
+            return false;
+        }
+        if(FechaNac.equals("")){
+            showMessageDialog(null, "Ingrese la Fecha de Nacimiento");
+            return false;
+        }
+        if(edad<0){
+            showMessageDialog(null, "Ingrese la edad");
+            return false;
+        }
+        if(medico.equals("")){
+            showMessageDialog(null, "Seleccione al medico");
+            return false;
+        }
+        
+        return true;
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -231,6 +314,7 @@ public class AgregarPacienteR extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -48,7 +48,7 @@ public class Registro extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        cmbUsuarios = new javax.swing.JComboBox<>();
+        cmbUsuarios = new javax.swing.JComboBox<String>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -81,7 +81,7 @@ public class Registro extends javax.swing.JFrame {
         jLabel7.setText("Tipo de usuario");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, -1, -1));
 
-        cmbUsuarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un usuario", "DOCTOR", "ASISTENTE", " " }));
+        cmbUsuarios.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione un usuario", "DOCTOR", "ASISTENTE", " " }));
         getContentPane().add(cmbUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, -1, -1));
 
         jLabel2.setText("Segundo nombre");
@@ -93,7 +93,7 @@ public class Registro extends javax.swing.JFrame {
         jLabel4.setText("Apellido materno");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, -1, -1));
 
-        jLabel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informacion del Usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153))); // NOI18N
+        jLabel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informacion del Usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(153, 153, 153)));
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 440, 290));
 
         jLabel5.setText("Contraseña");
@@ -147,12 +147,12 @@ public class Registro extends javax.swing.JFrame {
         getContentPane().add(pswContra1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 250, -1));
         getContentPane().add(pswContra2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 250, -1));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventanas/barra.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/barra.png"))); // NOI18N
         jLabel8.setText("jLabel3");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 80));
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventanas/fondo_blanco.jpg"))); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo_blanco.jpg"))); // NOI18N
         jLabel9.setText("jLabel8");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 460, 380));
 
