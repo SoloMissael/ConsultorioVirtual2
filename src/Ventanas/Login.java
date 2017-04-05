@@ -45,7 +45,7 @@ public class Login extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -92,8 +92,15 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Contraseña");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
-        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 190, 20));
-        getContentPane().add(pswContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 190, 20));
+
+        txtUsuario.setMinimumSize(new java.awt.Dimension(9, 25));
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyReleased(evt);
+            }
+        });
+        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 190, 23));
+        getContentPane().add(pswContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 190, 23));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventanas/barra.png"))); // NOI18N
         jLabel3.setText("jLabel3");
@@ -111,8 +118,20 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        JOptionPane.showMessageDialog(null,login(txtUsuario.getText(),pswContraseña.getText()));
+        if(login(txtUsuario.getText(),pswContraseña.getText()).equals("DOCTOR")){
+            //ABRIR VENTANA DOCTOR
+        }
+        if(login(txtUsuario.getText(),pswContraseña.getText()).equals("ASISTENTE")){
+            Recepcionista r = new Recepcionista();
+            r.setVisible(true);
+            dispose();
+        }
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void txtUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyReleased
+        String temp = txtUsuario.getText();
+        txtUsuario.setText(temp.toUpperCase());
+    }//GEN-LAST:event_txtUsuarioKeyReleased
 
     /**
      * @param args the command line arguments
