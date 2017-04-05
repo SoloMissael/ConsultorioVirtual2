@@ -5,8 +5,14 @@
  */
 package Ventanas;
 
+import Clases.conectar;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -14,9 +20,9 @@ import javax.swing.JOptionPane;
  */
 public class Recepcionista extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Recepcionista
-     */
+    conectar cc=new conectar();
+    Connection cn=cc.conexion();
+    
     public Recepcionista() {
         initComponents();
         setLocationRelativeTo(null);
@@ -287,7 +293,10 @@ public class Recepcionista extends javax.swing.JFrame {
                 date=fecha[5]+"-"+(i+1)+"-"+fecha[2];
             }
         }//for
-            JOptionPane.showMessageDialog(null,date);
+            obtenerCitas(date);
+            //consulta para sacar datos de citas de la fecha
+            
+            
     }//GEN-LAST:event_btnIrMouseClicked
     
     /**
@@ -349,4 +358,45 @@ public class Recepcionista extends javax.swing.JFrame {
     private javax.swing.JTabbedPane panel;
     private javax.swing.JTextField txtBusquedaAgenda;
     // End of variables declaration//GEN-END:variables
-}
+
+    public void obtenerCitas(String fecha){
+        String hora="";
+        String paciente="";
+        String fechaAct="";
+        String doct="";
+        String horaArr [];
+        String pacienteArr [];
+        String fechaActArr [];
+        String doctArr [];
+        TableModel tableModel = TablaAgenda.getModel();
+        tablaAgenda();
+        try{
+                 String query = "select hora, paciente, fecha, doctor from citas\n" +
+                "WHERE fecha= '"+ fecha +"' and estado = 1";
+                 PreparedStatement st = cn.prepareStatement(query);
+                 ResultSet rs = st.executeQuery();
+                 while(rs.next()){
+                    hora += rs.getString("hora")+",";
+                    paciente+=rs.getString("paciente")+",";
+                    fechaAct+=rs.getString("fecha")+",";
+                    doct+=rs.getString("doctor")+",";
+                    }
+                 
+            }catch (SQLException ex){
+                    System.out.println(ex.getMessage());
+              }
+        horaArr=hora.split(",");
+        pacienteArr=paciente.split(",");
+        fechaActArr=fechaAct.split(",");
+        doctArr=doct.split(",");
+        
+        for(int j = 0;j < tableModel.getColumnCount();j++){//j=columnas
+            for(int i=0;i<horaArr.length;i++){//i=filas
+                TablaAgenda.setValueAt(horaArr[i], i, 0);//valor, fila, columna
+                TablaAgenda.setValueAt(pacienteArr[i], i, 1);//valor, fila, columna
+                TablaAgenda.setValueAt(fechaActArr[i], i, 2);//valor, fila, columna
+                TablaAgenda.setValueAt(doctArr[i], i, 3);//valor, fila, columna
+            }
+        }
+    }//obtenerCitas
+}//class
