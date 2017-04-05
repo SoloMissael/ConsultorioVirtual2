@@ -29,12 +29,19 @@ public class Recepcionista extends javax.swing.JFrame {
         setTitle("ASISTENTE");
         setExtendedState(this.MAXIMIZED_BOTH);
         tablaAgenda();
+        //obtenerFecha();
         
         
     }
     public void tablaAgenda(){
         TablaAgenda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -282,21 +289,7 @@ public class Recepcionista extends javax.swing.JFrame {
     }//GEN-LAST:event_jCalendar1MouseClicked
 
     private void btnIrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIrMouseClicked
-        String date = jCalendar1.getDate()+"";
-        String meses[]={"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
-        String fecha[] = date.split(" ");
-        for(int i=0;i<meses.length;i++){
-            if(meses[i].equals(fecha[1])){
-                if((i+1)<10){
-                    date=fecha[5]+"-0"+(i+1)+"-"+fecha[2];
-                }else
-                date=fecha[5]+"-"+(i+1)+"-"+fecha[2];
-            }
-        }//for
-            obtenerCitas(date);
-            //consulta para sacar datos de citas de la fecha
-            
-            
+        obtenerFecha();
     }//GEN-LAST:event_btnIrMouseClicked
     
     /**
@@ -399,4 +392,19 @@ public class Recepcionista extends javax.swing.JFrame {
             }
         }
     }//obtenerCitas
+    
+    public void obtenerFecha(){
+        String date = jCalendar1.getDate()+"";
+        String meses[]={"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+        String fecha[] = date.split(" ");
+        for(int i=0;i<meses.length;i++){
+            if(meses[i].equals(fecha[1])){
+                if((i+1)<10){
+                    date=fecha[5]+"-0"+(i+1)+"-"+fecha[2];
+                }else
+                date=fecha[5]+"-"+(i+1)+"-"+fecha[2];
+            }
+        }//for
+            obtenerCitas(date);
+    }//obtenerFecha
 }//class
