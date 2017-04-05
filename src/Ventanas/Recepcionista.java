@@ -20,6 +20,7 @@ public class Recepcionista extends javax.swing.JFrame {
     public Recepcionista() {
         initComponents();
         setLocationRelativeTo(null);
+        setTitle("ASISTENTE");
         setExtendedState(this.MAXIMIZED_BOTH);
         tablaAgenda();
         
@@ -275,7 +276,18 @@ public class Recepcionista extends javax.swing.JFrame {
     }//GEN-LAST:event_jCalendar1MouseClicked
 
     private void btnIrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIrMouseClicked
-        JOptionPane.showMessageDialog(null,jCalendar1.getDate());
+        String date = jCalendar1.getDate()+"";
+        String meses[]={"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+        String fecha[] = date.split(" ");
+        for(int i=0;i<meses.length;i++){
+            if(meses[i].equals(fecha[1])){
+                if((i+1)<10){
+                    date=fecha[5]+"-0"+(i+1)+"-"+fecha[2];
+                }else
+                date=fecha[5]+"-"+(i+1)+"-"+fecha[2];
+            }
+        }//for
+            JOptionPane.showMessageDialog(null,date);
     }//GEN-LAST:event_btnIrMouseClicked
     
     /**
