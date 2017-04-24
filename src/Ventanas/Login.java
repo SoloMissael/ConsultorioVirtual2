@@ -119,13 +119,17 @@ public class Login extends javax.swing.JFrame {
 
     private void btnEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntrarMouseClicked
         if(login(txtUsuario.getText(),pswContraseña.getText()).equals("DOCTOR")){
-            //ABRIR VENTANA DOCTOR
+            Doctor d = new Doctor();/*enviar el id del doctor*/
+            d.setVisible(true);
+            dispose();
         }else
         if(login(txtUsuario.getText(),pswContraseña.getText()).equals("ASISTENTE")){
             Recepcionista r = new Recepcionista();
             r.setVisible(true);
             dispose();
-        }else{
+        }
+        
+        else{
             JOptionPane.showMessageDialog(null,"Usuario y/o contraseña no validos");
         }
     }//GEN-LAST:event_btnEntrarMouseClicked
