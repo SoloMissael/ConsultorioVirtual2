@@ -131,7 +131,6 @@ public class AgregarPacienteR extends javax.swing.JFrame {
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, -1, -1));
 
         txtNExpediente.setEditable(false);
-        txtNExpediente.setText("1");
         getContentPane().add(txtNExpediente, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 110, -1));
 
         txtSNombre.setText(" ");
@@ -371,17 +370,21 @@ public class AgregarPacienteR extends javax.swing.JFrame {
                             String FechaNac,int edad, String medico){
         String idPaciente = getRowNumber()+"";
         try{
-            PreparedStatement pst = cn.prepareStatement("INSERT INTO PACIENTE(id_paciente,"
-                    + "id_expediente,nombre_paciente,segnombre_paciente,apepat_paciente,"
-                    + "apemat_paciente,domicilio,ciudad,estado,codigo_postal,telefono_domicilio,"
-                    + "telefono_oficina,correo_electronico,sexo,Lugar_Nac,Fecha_Nac,Edad,Medico)"
+            PreparedStatement pst = cn.prepareStatement("INSERT INTO paciente(id_paciente,"
+                    + "nombre,segundo_nombre,apellido_paterno,"
+                    + "apelledo_materno,domicilio,ciudad,estado,codigo_postal,tel_domicilio,"
+                    + "tel_oficina,correo_electronico,sexo,"+
+                    "derechohabiente,lugar_nacimiento,fecha_nacimiento,edad,rfc,"+
+                    "estado_civil,nombre_madre,nombre_padre,nombre_pareja,procedencia,ocupacion,"+
+                    "escolaridad,observaciones,id_doctor)"
                     + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             pst.setString(1,idPaciente);
             pst.setString(2,id_Exp+"");
             pst.setString(3,nom);
             pst.setString(4,seg_nom);
+            pst.setString(5, medico);
            
-        }
+        } 
         
         catch(HeadlessException e){} catch (SQLException ex) {
                 Logger.getLogger(AgregarPacienteR.class.getName()).log(Level.SEVERE, null, ex);
@@ -402,6 +405,7 @@ public class AgregarPacienteR extends javax.swing.JFrame {
               }
             return numberRow;
     }//getRowNumber  
+    
     /**
      * @param args the command line arguments
      */
