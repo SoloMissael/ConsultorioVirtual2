@@ -1,6 +1,7 @@
 package Ventanas;
 
 import Clases.conectar;
+import com.mxrck.autocompleter.TextAutoCompleter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,8 +19,29 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         setTitle("Login");
         setLocationRelativeTo(null);
+        itemsUsuario();
     }
-
+public void itemsUsuario(){
+    TextAutoCompleter AutoCompletado = new TextAutoCompleter(txtUsuario);
+    String nombres="";
+    
+    try{
+                 String query = "select nombre, apellido_paterno from usuarios";
+                 PreparedStatement st = cn.prepareStatement(query);
+                 ResultSet rs = st.executeQuery();
+                 while(rs.next()){
+                    nombres += rs.getString("nombre")+" "+
+                           rs.getString("apellido_paterno")+",";
+                    }
+            }catch (SQLException ex){
+                    System.out.println(ex.getMessage());
+              }
+    String arrNombres[]= nombres.split(",");
+    for(int i=0;i<arrNombres.length;i++){
+        AutoCompletado.addItem(arrNombres[i]);
+    }
+    
+}//itemsUsuario
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
