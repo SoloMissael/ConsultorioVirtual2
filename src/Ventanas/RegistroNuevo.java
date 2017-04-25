@@ -307,7 +307,7 @@ public class RegistroNuevo extends javax.swing.JFrame {
     public void insertar(String tipo_usuario,String nombre,String segundo_nombre,
                String apellido_paterno,String apellido_materno,String contraseña){
 
-        String id = getRowNumber()+1+"";   
+        String id = getRowNumber("usuarios")+1+"";   
            try{
                PreparedStatement pst=cn.prepareStatement("INSERT INTO usuarios"
         + "(id_usuario,tipo_usuario ,nombre,segundo_nombre,apellido_paterno,"
@@ -332,10 +332,10 @@ public class RegistroNuevo extends javax.swing.JFrame {
            }
     }//insertar
  
-    public int getRowNumber(){
+    public int getRowNumber(String tabla){
        int numberRow = 0;
             try{
-                 String query = "select count(*) from usuarios";
+                 String query = "select count(*) from "+tabla;
                  PreparedStatement st = cn.prepareStatement(query);
                  ResultSet rs = st.executeQuery();
                  while(rs.next()){

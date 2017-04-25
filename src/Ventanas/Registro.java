@@ -320,19 +320,18 @@ public class Registro extends javax.swing.JFrame {
                pst.setString(5,apellidoPaterno);
                pst.setString(6,apellidoMaterno);
                pst.setString(7,Contraseña2);
-
+               
         int a=pst.executeUpdate();
          if(a>0){
                showMessageDialog(null,"Registro exitoso");
-                //mostrardatos("");
+               insertarDoctor(id);
+               //mostrardatos("");
            }
            else{
                 showMessageDialog(null,"Error al agregar");
            }
            }catch(HeadlessException | SQLException e){
-           }
-           
-           
+           }   
     }//insertar
  
     public int getRowNumber(String tabla){
@@ -387,4 +386,40 @@ public class Registro extends javax.swing.JFrame {
        }
         return estado;
     }//validarUsuario
+    
+public void insertarDoctor(String id_usuario){
+    String id_doctor = getRowNumber("doctor")+1+"";
+    try{
+               PreparedStatement pst=cn.prepareStatement("INSERT INTO doctor"
+        + "(id_usuario,id_doctor,domicilio ,ciudad,estado,"
+        + "codigo_postal,tel_domicilio,tel_oficina,tel_movil,tel_extra,"
+         + "correo_electronico,cedula_profecional,especialidad,observaciones) "
+                       + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)"); 
+               pst.setString(1,id_usuario);
+               pst.setString(2,id_doctor);
+               pst.setString(3,null);
+               pst.setString(4,null);
+               pst.setString(5,null);
+               pst.setString(6,null);
+               pst.setString(7,null);
+               pst.setString(8,null);
+               pst.setString(9,null);
+               pst.setString(10,null);
+               pst.setString(11,null);
+               pst.setString(12,null);
+               pst.setString(13,null);
+               pst.setString(14,null);
+        int a=pst.executeUpdate();
+         if(a>0){
+               showMessageDialog(null,"Registro de doctor creado");
+                //mostrardatos("");
+           }
+           else{
+                showMessageDialog(null,"Error al agregar");
+           }
+           }catch(HeadlessException | SQLException e){
+           }  
+}//insertarDoctor
+        
+        
 }//class
