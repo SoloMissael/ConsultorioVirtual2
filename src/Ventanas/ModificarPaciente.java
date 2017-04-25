@@ -281,6 +281,12 @@ public class ModificarPaciente extends javax.swing.JFrame {
         jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Busqueda_32.png"))); // NOI18N
         jLabel28.setText("REALIZAR BUSQUEDA");
         getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 230, -1));
+
+        txtBusquedaAgenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBusquedaAgendaActionPerformed(evt);
+            }
+        });
         getContentPane().add(txtBusquedaAgenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 260, 24));
 
         cmbPacientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una opcion" }));
@@ -292,7 +298,7 @@ public class ModificarPaciente extends javax.swing.JFrame {
 
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo_blanco.jpg"))); // NOI18N
         jLabel16.setText("jLabel16");
-        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 100, 1020, 590));
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 100, 1000, 590));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -327,6 +333,10 @@ public class ModificarPaciente extends javax.swing.JFrame {
        }
               
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void txtBusquedaAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusquedaAgendaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBusquedaAgendaActionPerformed
 
     public boolean validarCampos(String nom,String apePat,String domicilio,
                 String ciudad, String estado,String telDom,String sexo,

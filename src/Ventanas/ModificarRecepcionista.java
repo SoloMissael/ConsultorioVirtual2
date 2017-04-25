@@ -92,7 +92,7 @@ public class ModificarRecepcionista extends javax.swing.JFrame {
         getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Menu Azul.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -189,7 +189,7 @@ public class ModificarRecepcionista extends javax.swing.JFrame {
         jLabel21.setText("Buscar");
         jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 90, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1000, 570));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 910, 570));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

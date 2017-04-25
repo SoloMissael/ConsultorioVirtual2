@@ -298,7 +298,8 @@ public class AgregarPacienteR extends javax.swing.JFrame {
             int edad = Integer.parseInt(txtEdad.getText());
             String medico = cmbMedico.getSelectedItem().toString();
        
-       if(validarCampos(primer_nom,ape_pat,domicilio, ciudad,estado,Tel_Dom,sexo,Lug_Nac,Fec_Nac,2,medico)==true){
+       if(validarCampos(primer_nom,ape_pat,domicilio, ciudad,estado,Tel_Dom,
+               sexo,Lug_Nac,Fec_Nac,2,medico)==true){
            showMessageDialog(null, "se puede insertar");
        }else{
            showMessageDialog(null, "no se puede insertar");

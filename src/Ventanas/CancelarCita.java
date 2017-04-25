@@ -29,30 +29,53 @@ public class CancelarCita extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
         txtHora = new javax.swing.JTextField();
         txtPaciente = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
         txtDoctor = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Hora: ");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, 20));
 
         jLabel2.setText("Paciente: ");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, 20));
 
         jLabel3.setText("Doctor: ");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, 20));
+
+        jPanel2.setBackground(new java.awt.Color(0, 102, 153));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar_32.png"))); // NOI18N
+        jLabel6.setText("Cancelar");
+        jPanel2.add(jLabel6);
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 290, 110, -1));
+
+        jPanel1.setBackground(new java.awt.Color(0, 102, 153));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Aceptar_32.png"))); // NOI18N
+        jLabel5.setText("Aceptar");
+        jPanel1.add(jLabel5);
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 100, -1));
 
         txtHora.setEditable(false);
         txtHora.addActionListener(new java.awt.event.ActionListener() {
@@ -60,51 +83,52 @@ public class CancelarCita extends javax.swing.JFrame {
                 txtHoraActionPerformed(evt);
             }
         });
-        getContentPane().add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 278, -1));
+        getContentPane().add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 278, -1));
 
         txtPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPacienteActionPerformed(evt);
             }
         });
-        getContentPane().add(txtPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 278, -1));
+        getContentPane().add(txtPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 278, -1));
+
+        jPanel3.setBackground(new java.awt.Color(0, 102, 153));
+
+        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Busqueda2_32.png"))); // NOI18N
+        jLabel21.setText("Buscar");
+        jPanel3.add(jLabel21);
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 90, 40));
 
         txtDoctor.setEditable(false);
-        getContentPane().add(txtDoctor, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 278, -1));
-        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, -1, -1));
+        getContentPane().add(txtDoctor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 278, -1));
+        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, -1, -1));
 
         jLabel4.setText("Fecha");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, 20));
 
-        jLabel5.setText("Aceptar");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, -1, -1));
-
-        jLabel6.setText("Cancelar");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, -1, -1));
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CancelarCita_32.png"))); // NOI18N
         jLabel8.setText("Cancelar Cita");
-        jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jLabel8.setInheritsPopupMenu(false);
         jLabel8.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Busqueda_32.png"))); // NOI18N
         jLabel13.setText("REALIZAR BUSQUEDA");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 230, -1));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 230, -1));
 
         jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Menu Azul.png"))); // NOI18N
-        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 70));
-
-        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Busqueda2_32.png"))); // NOI18N
-        jLabel21.setText("Buscar");
-        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 90, -1));
+        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 70));
 
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo_blanco.jpg"))); // NOI18N
         jLabel16.setText("jLabel16");
-        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 420, 290));
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 410, 290));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -166,6 +190,9 @@ public class CancelarCita extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField txtDoctor;
     private javax.swing.JTextField txtHora;
     private javax.swing.JTextField txtPaciente;

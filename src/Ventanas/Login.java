@@ -40,7 +40,6 @@ public void itemsUsuario(){
     for(int i=0;i<arrNombres.length;i++){
         AutoCompletado.addItem(arrNombres[i]);
     }
-    
 }//itemsUsuario
     /**
      * This method is called from within the constructor to initialize the form.

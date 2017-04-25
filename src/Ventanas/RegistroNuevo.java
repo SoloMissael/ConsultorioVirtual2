@@ -53,7 +53,6 @@ public class RegistroNuevo extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         btnAceptar = new javax.swing.JButton();
@@ -63,10 +62,11 @@ public class RegistroNuevo extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         pswContra1 = new javax.swing.JPasswordField();
         pswContra2 = new javax.swing.JPasswordField();
-        jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -97,10 +97,6 @@ public class RegistroNuevo extends javax.swing.JFrame {
 
         jLabel5.setText("Contraseña");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel11.setText("Registro de Usuario");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
         jLabel6.setText("Confirmar contraseña");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, -1, -1));
@@ -146,10 +142,6 @@ public class RegistroNuevo extends javax.swing.JFrame {
         getContentPane().add(pswContra1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 250, -1));
         getContentPane().add(pswContra2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 250, -1));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/barra.png"))); // NOI18N
-        jLabel8.setText("jLabel3");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 80));
-
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo_blanco.jpg"))); // NOI18N
         jLabel9.setText("jLabel8");
@@ -160,6 +152,16 @@ public class RegistroNuevo extends javax.swing.JFrame {
 
         jLabel14.setText("Seleccione su nombre de usuario y escriba su contraseña para ingresar al sistema.");
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 410, 20));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Usuarios_32.png"))); // NOI18N
+        jLabel11.setText("Registro de Usuario");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Menu Azul.png"))); // NOI18N
+        jLabel8.setText("jLabel3");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 80));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

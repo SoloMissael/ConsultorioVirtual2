@@ -80,7 +80,7 @@ public class Registro extends javax.swing.JFrame {
         jLabel7.setText("Tipo de usuario");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, -1, -1));
 
-        cmbUsuarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un usuario", "DOCTOR", " " }));
+        cmbUsuarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un usuario", "DOCTOR" }));
         getContentPane().add(cmbUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, -1, -1));
 
         jLabel2.setText("Segundo nombre");
@@ -99,8 +99,10 @@ public class Registro extends javax.swing.JFrame {
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Usuarios_32.png"))); // NOI18N
         jLabel11.setText("Registro de Usuario");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         jLabel6.setText("Confirmar contraseña");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, -1, -1));
@@ -146,7 +148,7 @@ public class Registro extends javax.swing.JFrame {
         getContentPane().add(pswContra1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 250, -1));
         getContentPane().add(pswContra2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 250, -1));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/barra.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Menu Azul.png"))); // NOI18N
         jLabel8.setText("jLabel3");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 80));
 
@@ -306,7 +308,7 @@ public class Registro extends javax.swing.JFrame {
     public void insertar(String tipo_usuario,String nombre,String segundo_nombre,
                String apellido_paterno,String apellido_materno,String contraseña){
 
-        String id = getRowNumber()+1+"";   
+        String id = getRowNumber("usuarios")+1+"";   
            try{
                PreparedStatement pst=cn.prepareStatement("INSERT INTO usuarios"
         + "(id_usuario,tipo_usuario ,nombre,segundo_nombre,apellido_paterno,"
@@ -329,12 +331,14 @@ public class Registro extends javax.swing.JFrame {
            }
            }catch(HeadlessException | SQLException e){
            }
+           
+           
     }//insertar
  
-    public int getRowNumber(){
+    public int getRowNumber(String tabla){
        int numberRow = 0;
             try{
-                 String query = "select count(*) from usuarios";
+                 String query = "select count(*) from "+tabla;
                  PreparedStatement st = cn.prepareStatement(query);
                  ResultSet rs = st.executeQuery();
                  while(rs.next()){

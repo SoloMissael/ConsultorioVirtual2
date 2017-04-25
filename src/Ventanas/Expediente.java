@@ -102,7 +102,12 @@ public class Expediente extends javax.swing.JFrame {
         jTextArea2 = new javax.swing.JTextArea();
         jPanel4 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
+        txtAreaPatologicos = new javax.swing.JScrollPane();
+        jTextArea23 = new javax.swing.JTextArea();
         jPanel5 = new javax.swing.JPanel();
+        jLabel48 = new javax.swing.JLabel();
+        txtAreaNoPAtologicos = new javax.swing.JScrollPane();
+        jTextArea24 = new javax.swing.JTextArea();
         jPanel6 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
         rdbtnParto = new javax.swing.JRadioButton();
@@ -362,7 +367,7 @@ public class Expediente extends javax.swing.JFrame {
         jLabel51.setText("Expediente");
         getContentPane().add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, -1, -1));
 
-        lblNuevaConsulta.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblNuevaConsulta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblNuevaConsulta.setForeground(new java.awt.Color(255, 255, 255));
         lblNuevaConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Consulta_32.png"))); // NOI18N
         lblNuevaConsulta.setText("Nueva Consulta");
@@ -380,6 +385,8 @@ public class Expediente extends javax.swing.JFrame {
 
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 10, 80));
+
+        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -593,18 +600,25 @@ public class Expediente extends javax.swing.JFrame {
         jLabel29.setBorder(javax.swing.BorderFactory.createTitledBorder("Antecedentes Patológicos"));
         jPanel4.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 530, 460));
 
+        jTextArea23.setColumns(20);
+        jTextArea23.setRows(5);
+        txtAreaPatologicos.setViewportView(jTextArea23);
+
+        jPanel4.add(txtAreaPatologicos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 490, 420));
+
         jTabbedPane2.addTab("Patológicos", jPanel4);
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 899, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 525, Short.MAX_VALUE)
-        );
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel48.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "No Patologicos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel5.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 500, 500));
+
+        jTextArea24.setColumns(20);
+        jTextArea24.setRows(5);
+        txtAreaNoPAtologicos.setViewportView(jTextArea24);
+
+        jPanel5.add(txtAreaNoPAtologicos, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 460, 460));
 
         jTabbedPane2.addTab("No Patológicos", jPanel5);
 
@@ -1386,9 +1400,9 @@ public class Expediente extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Consultas", jPanel32);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1000, 550));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, 550));
 
-        lblGuardarExpediente.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblGuardarExpediente.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblGuardarExpediente.setForeground(new java.awt.Color(255, 255, 255));
         lblGuardarExpediente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Guardar_32.png"))); // NOI18N
         lblGuardarExpediente.setText("Guardar Expediente");
@@ -1396,7 +1410,7 @@ public class Expediente extends javax.swing.JFrame {
         lblGuardarExpediente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(lblGuardarExpediente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        lblEliminarExpediente.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblEliminarExpediente.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblEliminarExpediente.setForeground(new java.awt.Color(255, 255, 255));
         lblEliminarExpediente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CancelarCita_32.png"))); // NOI18N
         lblEliminarExpediente.setText("Eliminar Expediente");
@@ -1548,6 +1562,7 @@ public class Expediente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
@@ -1670,6 +1685,8 @@ public class Expediente extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea20;
     private javax.swing.JTextArea jTextArea21;
     private javax.swing.JTextArea jTextArea22;
+    private javax.swing.JTextArea jTextArea23;
+    private javax.swing.JTextArea jTextArea24;
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextArea jTextArea4;
     private javax.swing.JTextArea jTextArea5;
@@ -1730,6 +1747,8 @@ public class Expediente extends javax.swing.JFrame {
     private javax.swing.JScrollPane txtAreaHemolinfatico;
     private javax.swing.JScrollPane txtAreaMotivoConsulta;
     private javax.swing.JScrollPane txtAreaMusculo;
+    private javax.swing.JScrollPane txtAreaNoPAtologicos;
+    private javax.swing.JScrollPane txtAreaPatologicos;
     private javax.swing.JScrollPane txtAreaPiel;
     private javax.swing.JScrollPane txtAreaReproductor;
     private javax.swing.JScrollPane txtAreaRespiratorio;

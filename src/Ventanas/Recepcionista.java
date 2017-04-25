@@ -23,7 +23,7 @@ public class Recepcionista extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("RECEPCIONISTA");
-        setExtendedState(this.MAXIMIZED_BOTH);
+        //setExtendedState(this.MAXIMIZED_BOTH);
         tablaAgenda();
         obtenerFecha();
         
@@ -42,6 +42,19 @@ public class Recepcionista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jCalendar2 = new com.toedter.calendar.JCalendar();
+        jCalendar1 = new com.toedter.calendar.JCalendar();
+        btnIr = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        txtBusquedaAgenda = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Tabla = new javax.swing.JTable();
+        cmbPacientes = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
         panel = new javax.swing.JTabbedPane();
         AgendaPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -60,20 +73,84 @@ public class Recepcionista extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jLabel11 = new javax.swing.JLabel();
         Fondo_Pacientes1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        Tabla = new javax.swing.JTable();
-        txtBusquedaAgenda = new javax.swing.JTextField();
-        cmbPacientes = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jCalendar1 = new com.toedter.calendar.JCalendar();
-        btnIr = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel3.setBackground(new java.awt.Color(0, 102, 153));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jCalendar2.setBackground(new java.awt.Color(255, 255, 255));
+        jCalendar2.setSundayForeground(new java.awt.Color(255, 255, 255));
+        jCalendar2.setWeekdayForeground(new java.awt.Color(0, 102, 153));
+        jPanel3.add(jCalendar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 220, 170));
+
+        jCalendar1.setBackground(new java.awt.Color(255, 255, 255));
+        jCalendar1.setSundayForeground(new java.awt.Color(255, 255, 255));
+        jCalendar1.setWeekdayForeground(new java.awt.Color(0, 102, 153));
+        jPanel3.add(jCalendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 220, 160));
+
+        btnIr.setText("Ir a fecha");
+        btnIr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIrActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnIr, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, -1, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 240, 390));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo.png"))); // NOI18N
+        jLabel6.setText("jLabel2");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(-60, 20, 310, 170));
+
+        jPanel4.setBackground(new java.awt.Color(0, 102, 153));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Busqueda_32.png"))); // NOI18N
+        jLabel7.setText("Realizar Busqueda");
+        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 230, -1));
+        jPanel4.add(txtBusquedaAgenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 260, 30));
+
+        Tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "", "", "", ""
+            }
+        ));
+        jScrollPane1.setViewportView(Tabla);
+
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 890, 170));
+
+        cmbPacientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una opcion" }));
+        jPanel4.add(cmbPacientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 260, 30));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Busqueda2_32.png"))); // NOI18N
+        jLabel8.setText("Buscar");
+        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 50, 90, -1));
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 960, 430));
+
+        panel.setForeground(new java.awt.Color(0, 102, 153));
+        panel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         panel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelMouseClicked(evt);
@@ -120,7 +197,7 @@ public class Recepcionista extends javax.swing.JFrame {
         AgendaPanel.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 20, 80));
 
         Fondo_Agenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Menu Azul.png"))); // NOI18N
-        AgendaPanel.add(Fondo_Agenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        AgendaPanel.add(Fondo_Agenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, -1));
 
         panel.addTab("Agenda", new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Calendario_64.png")), AgendaPanel); // NOI18N
 
@@ -197,56 +274,9 @@ public class Recepcionista extends javax.swing.JFrame {
 
         panel.addTab("Mi Perfil", new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Configuracion_64.png")), PerfilPanel); // NOI18N
 
-        getContentPane().add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, 920, -1));
+        jPanel1.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 920, -1));
 
-        Tabla.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "", "", "", ""
-            }
-        ));
-        jScrollPane1.setViewportView(Tabla);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, 910, 300));
-        getContentPane().add(txtBusquedaAgenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, 260, 24));
-
-        cmbPacientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una opcion" }));
-        getContentPane().add(cmbPacientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 240, 260, -1));
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Busqueda_32.png"))); // NOI18N
-        jLabel7.setText("REALIZAR BUSQUEDA");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 200, 230, -1));
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Busqueda2_32.png"))); // NOI18N
-        jLabel8.setText("Buscar");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 230, 90, -1));
-        getContentPane().add(jCalendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        btnIr.setText("Ir a fecha");
-        btnIr.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIrActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnIr, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, -1, -1));
-
-        jLabel9.setText("jLabel9");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
-
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1400, 720));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 620));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -339,6 +369,7 @@ public class Recepcionista extends javax.swing.JFrame {
     private javax.swing.JButton btnIr;
     private javax.swing.JComboBox<String> cmbPacientes;
     private com.toedter.calendar.JCalendar jCalendar1;
+    private com.toedter.calendar.JCalendar jCalendar2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -346,10 +377,12 @@ public class Recepcionista extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;

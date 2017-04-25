@@ -241,7 +241,7 @@ public class Consulta extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel25.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DIAGNOSTICO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jLabel25.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "TRATAMIENTO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
         jPanel3.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 410, 150));
 
         txtAreaMedicamento.setColumns(20);
@@ -286,7 +286,7 @@ public class Consulta extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Evaluacion", jPanel3);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1000, 510));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 990, 510));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

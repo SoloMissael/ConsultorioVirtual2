@@ -18,7 +18,7 @@ public class Principal1 extends javax.swing.JFrame {
         
         initComponents();
         setLocationRelativeTo(null);
-        if(r.getRowNumber()==0){
+        if(r.getRowNumber("usuarios")==0){
             r.setVisible(true); 
         }
         
