@@ -1,4 +1,5 @@
 package Ventanas;
+import Clases.RegistroClase;
 import Clases.conectar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,21 +14,19 @@ import org.omg.CORBA.ORB;
 
 public class Principal1 extends javax.swing.JFrame {
     Registro r = new Registro();
-    
+    RegistroClase rc = new RegistroClase();
     public Principal1(){
         
         initComponents();
         setLocationRelativeTo(null);
-        if(r.getRowNumber("usuarios")==0){
+        if(rc.getRowNumber("usuarios")==0){
             r.setVisible(true); 
         }
         
         else{
             new Login().setVisible(true);
-        }
-        
+        }      
     }
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -85,7 +84,7 @@ public class Principal1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     public void actionPerformed(ActionEvent e){   
     }
-    
+  
     public static void main(String args[]) throws InterruptedException{
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -130,8 +129,4 @@ public class Principal1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 
-
- 
-    
-  
 }//class

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//ventana de registro inicial
 package Ventanas;
 
 import Clases.Usuarios;
@@ -14,6 +10,8 @@ import Clases.conectar;
 import java.awt.HeadlessException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javafx.scene.control.ComboBox;
+import Clases.RegistroClase;
 
 
 public class RegistroNuevo extends javax.swing.JFrame {
@@ -28,6 +26,7 @@ public class RegistroNuevo extends javax.swing.JFrame {
      //conexion
         conectar cc=new conectar();
         Connection cn=cc.conexion();
+        RegistroClase reg = new RegistroClase();
     
     public RegistroNuevo() {
         initComponents();
@@ -53,6 +52,7 @@ public class RegistroNuevo extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         btnAceptar = new javax.swing.JButton();
@@ -62,11 +62,10 @@ public class RegistroNuevo extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         pswContra1 = new javax.swing.JPasswordField();
         pswContra2 = new javax.swing.JPasswordField();
+        jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -80,7 +79,7 @@ public class RegistroNuevo extends javax.swing.JFrame {
         jLabel7.setText("Tipo de usuario");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, -1, -1));
 
-        cmbUsuarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un usuario", "DOCTOR", "ASISTENTE", " " }));
+        cmbUsuarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un usuario", "DOCTOR", "ASISTENTE" }));
         getContentPane().add(cmbUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, -1, -1));
 
         jLabel2.setText("Segundo nombre");
@@ -97,6 +96,12 @@ public class RegistroNuevo extends javax.swing.JFrame {
 
         jLabel5.setText("Contraseña");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Usuarios_32.png"))); // NOI18N
+        jLabel11.setText("Registro de Usuario");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         jLabel6.setText("Confirmar contraseña");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, -1, -1));
@@ -142,6 +147,10 @@ public class RegistroNuevo extends javax.swing.JFrame {
         getContentPane().add(pswContra1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 250, -1));
         getContentPane().add(pswContra2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 250, -1));
 
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Menu Azul.png"))); // NOI18N
+        jLabel8.setText("jLabel3");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 80));
+
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo_blanco.jpg"))); // NOI18N
         jLabel9.setText("jLabel8");
@@ -152,16 +161,6 @@ public class RegistroNuevo extends javax.swing.JFrame {
 
         jLabel14.setText("Seleccione su nombre de usuario y escriba su contraseña para ingresar al sistema.");
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 410, 20));
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Usuarios_32.png"))); // NOI18N
-        jLabel11.setText("Registro de Usuario");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Menu Azul.png"))); // NOI18N
-        jLabel8.setText("jLabel3");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 80));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -175,46 +174,16 @@ public class RegistroNuevo extends javax.swing.JFrame {
         apellidoMaterno=txtApMat.getText();
         Contraseña=pswContra1.getText();
         Contraseña2=pswContra2.getText();
-        
-        if(nombre.equals("")){
-            showMessageDialog(null, "Ingrese un nombre");
-            estado=false;
-            return;
-        }
-        if(apellidoPaterno.equals("")){
-            showMessageDialog(null, "Ingrese un apellido");
-            estado=false;
-            return;
-        }
-        if(Contraseña.equals("")||Contraseña2.equals("")){
-            showMessageDialog(null, "Ingrese una contraseña");
-            estado=false;
-            return;
-        }
-        if(!Contraseña.equals(Contraseña2)){
-                showMessageDialog(null, "Las contraseñas no coinciden");
-                estado=false;
-                return;
-            }
-        if(cmbUsuarios.getSelectedIndex()==0){
-            showMessageDialog(null, "Seleccione un tipo");
-            estado=false;
-            return;
-        }
-        
-        if((validarUsuario(nombre, segundoNombre, apellidoPaterno, apellidoMaterno))==true){
-             if(estado==true){
-                    insertar(tipo, nombre, segundoNombre, apellidoPaterno, apellidoMaterno, Contraseña);
-                    this.dispose();
-                }else{
-                    showMessageDialog(null, "Error en los datos");
-                }
-        }
-        else{
-                showMessageDialog(null, "Registro duplicado");
-        }
-            
-                
+        int indice = cmbUsuarios.getSelectedIndex();
+        if(reg.validarCampos(tipo, nombre, segundoNombre, apellidoPaterno, 
+                apellidoMaterno, Contraseña, Contraseña2, indice)){
+            if(reg.validarUsuario(nombre, segundoNombre, apellidoPaterno, apellidoMaterno)){
+        reg.insertar(tipo,nombre,segundoNombre,apellidoPaterno,apellidoMaterno,
+                Contraseña);
+                dispose();
+            }//validarUsuario
+            else{showMessageDialog(null,"Usuario duplicado");}
+        }//validarCampos          
     }//GEN-LAST:event_btnAceptarMouseClicked
 //mouseclicked
     
@@ -300,88 +269,4 @@ public class RegistroNuevo extends javax.swing.JFrame {
     private javax.swing.JTextField txtSegundoNombre;
     // End of variables declaration//GEN-END:variables
 
-    private void mostrardatos(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void insertar(String tipo_usuario,String nombre,String segundo_nombre,
-               String apellido_paterno,String apellido_materno,String contraseña){
-
-        String id = getRowNumber("usuarios")+1+"";   
-           try{
-               PreparedStatement pst=cn.prepareStatement("INSERT INTO usuarios"
-        + "(id_usuario,tipo_usuario ,nombre,segundo_nombre,apellido_paterno,"
-        + "apellido_materno,contraseña) VALUES(?,?,?,?,?,?,?)"); 
-               pst.setString(1,id);
-               pst.setString(2,tipo);
-               pst.setString(3,nombre);
-               pst.setString(4,segundoNombre);
-               pst.setString(5,apellidoPaterno);
-               pst.setString(6,apellidoMaterno);
-               pst.setString(7,Contraseña2);
-
-        int a=pst.executeUpdate();
-         if(a>0){
-               showMessageDialog(null,"Registro exitoso");
-                //mostrardatos("");
-           }
-           else{
-                showMessageDialog(null,"Error al agregar");
-           }
-           }catch(HeadlessException | SQLException e){
-           }
-    }//insertar
- 
-    public int getRowNumber(String tabla){
-       int numberRow = 0;
-            try{
-                 String query = "select count(*) from "+tabla;
-                 PreparedStatement st = cn.prepareStatement(query);
-                 ResultSet rs = st.executeQuery();
-                 while(rs.next()){
-                   numberRow = rs.getInt("count(*)");
-                    }
-            }catch (SQLException ex){
-                    System.out.println(ex.getMessage());
-              }
-            return numberRow;
-    }//getRowNumber  
- 
-    
-    public boolean validarUsuario(String nombre,String segundo_nombre,
-               String apellido_paterno,String apellido_materno){
-        boolean estado = true;
-        String nombreTemp="";
-        String segNombre="";
-        String apPat="";
-        String apMat="";
-        try{
-           String query = "select * from usuarios";
-            PreparedStatement st = cn.prepareStatement(query);
-            ResultSet rs = st.executeQuery();
-            
-            while(rs.next()){
-                nombreTemp+=rs.getString("nombre")+",";
-                segNombre+=rs.getString("segundo_nombre")+",";
-                apPat+=rs.getString("apellido_paterno")+",";
-                apMat+=rs.getString("apellido_materno")+",";
-            }//while
-            String nombres[]=nombreTemp.split(",");
-            String segundonombre[]=segNombre.split(",");
-            String apPaterno[]=apPat.split(",");
-            String apMaterno []=apMat.split(",");
-            for(int i=0;i<nombres.length;i++){
-                if(nombres[i].equals(nombre)&&
-                        segundonombre[i].equals(segundo_nombre)&&
-                        apPaterno[i].equals(apellido_paterno)&&
-                        apMaterno[i].equals(apellido_materno)){
-                estado=false;
-                }
-            }
-       }//try
-       catch(SQLException ex){
-            System.out.println(ex.getMessage());
-       }
-        return estado;
-    }//validarUsuario
-}//class
+}//clase

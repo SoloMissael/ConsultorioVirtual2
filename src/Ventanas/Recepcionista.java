@@ -1,4 +1,5 @@
 package Ventanas;
+import Clases.RecepcionistaClase;
 import Clases.conectar;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,31 +13,16 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class Recepcionista extends javax.swing.JFrame {
-
-    conectar cc=new conectar();
-    Connection cn=cc.conexion();
-    DefaultTableModel modelo;
-    String cabeceraCitas[]={"Hora", "Paciente", "Fecha", "Doctor"};
-    String cabeceraPacientes[]={"Primer nombre", "Segundo nombre", "Apellido paterno", "Apellido materno"};
-    String datos[][]={};
+    RecepcionistaClase r =  new RecepcionistaClase();
     public Recepcionista() {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("RECEPCIONISTA");
-        //setExtendedState(this.MAXIMIZED_BOTH);
-        tablaAgenda();
-        obtenerFecha();
+        Tabla.setModel(r.tablaAgenda());
+        //obtenerFecha();
         
     }
-    public void tablaAgenda(){
-        modelo=new DefaultTableModel(datos,cabeceraCitas);
-        Tabla.setModel(modelo);
-    }
-    
-    public void tablaPacientes(){
-        modelo=new DefaultTableModel(datos,cabeceraPacientes);
-        Tabla.setModel(modelo);
-    }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -44,8 +30,7 @@ public class Recepcionista extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jCalendar2 = new com.toedter.calendar.JCalendar();
-        jCalendar1 = new com.toedter.calendar.JCalendar();
+        Calendar1 = new com.toedter.calendar.JCalendar();
         btnIr = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -83,29 +68,24 @@ public class Recepcionista extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(0, 102, 153));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jCalendar2.setBackground(new java.awt.Color(255, 255, 255));
-        jCalendar2.setSundayForeground(new java.awt.Color(255, 255, 255));
-        jCalendar2.setWeekdayForeground(new java.awt.Color(0, 102, 153));
-        jPanel3.add(jCalendar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 220, 170));
-
-        jCalendar1.setBackground(new java.awt.Color(255, 255, 255));
-        jCalendar1.setSundayForeground(new java.awt.Color(255, 255, 255));
-        jCalendar1.setWeekdayForeground(new java.awt.Color(0, 102, 153));
-        jPanel3.add(jCalendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 220, 160));
+        Calendar1.setBackground(new java.awt.Color(51, 255, 204));
+        Calendar1.setDecorationBackgroundColor(new java.awt.Color(255, 255, 255));
+        Calendar1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jPanel3.add(Calendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 270));
 
         btnIr.setText("Ir a fecha");
-        btnIr.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIrActionPerformed(evt);
+        btnIr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnIrMouseClicked(evt);
             }
         });
-        jPanel3.add(btnIr, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, -1, -1));
+        jPanel3.add(btnIr, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, -1, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 240, 390));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 400, 420));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo.png"))); // NOI18N
         jLabel6.setText("jLabel2");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(-60, 20, 310, 170));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 310, 170));
 
         jPanel4.setBackground(new java.awt.Color(0, 102, 153));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -147,7 +127,7 @@ public class Recepcionista extends javax.swing.JFrame {
         jLabel8.setText("Buscar");
         jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 50, 90, -1));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 960, 430));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 190, 910, 430));
 
         panel.setForeground(new java.awt.Color(0, 102, 153));
         panel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -197,7 +177,7 @@ public class Recepcionista extends javax.swing.JFrame {
         AgendaPanel.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 20, 80));
 
         Fondo_Agenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Menu Azul.png"))); // NOI18N
-        AgendaPanel.add(Fondo_Agenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, -1));
+        AgendaPanel.add(Fondo_Agenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, -1));
 
         panel.addTab("Agenda", new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Calendario_64.png")), AgendaPanel); // NOI18N
 
@@ -274,16 +254,16 @@ public class Recepcionista extends javax.swing.JFrame {
 
         panel.addTab("Mi Perfil", new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Configuracion_64.png")), PerfilPanel); // NOI18N
 
-        jPanel1.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 920, -1));
+        jPanel1.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 910, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 620));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1350, 640));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelMouseClicked
         if(panel.getSelectedIndex()==0){
-            tablaAgenda();
+            Tabla.setModel(r.tablaPacientes());
             cmbPacientes.removeAllItems();
             cmbPacientes.addItem("Seleccione una opcion");
             cmbPacientes.addItem("Paciente");
@@ -291,7 +271,7 @@ public class Recepcionista extends javax.swing.JFrame {
             cmbPacientes.addItem("Doctor");
         }
         if(panel.getSelectedIndex()==1){
-            tablaPacientes();
+            Tabla.setModel(r.obtenerPacientes());
             cmbPacientes.removeAllItems();
             cmbPacientes.addItem("Seleccione una opcion");
             cmbPacientes.addItem("Paciente");
@@ -302,12 +282,6 @@ public class Recepcionista extends javax.swing.JFrame {
         AgregarPacienteR ap = new AgregarPacienteR();
         ap.setVisible(true);
     }//GEN-LAST:event_lblAgregarPacienteMouseClicked
-
-    private void btnIrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIrActionPerformed
-        tablaAgenda();
-        obtenerFecha();
-        panel.setSelectedIndex(0);
-    }//GEN-LAST:event_btnIrActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         new NuevaCita().setVisible(true);
@@ -324,6 +298,12 @@ public class Recepcionista extends javax.swing.JFrame {
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         new CancelarCita().setVisible(true);
     }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void btnIrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIrMouseClicked
+        String fecha = Calendar1.getDate().toString();
+        fecha=r.obtenerFecha(fecha);
+        Tabla.setModel(r.obtenerCitas(fecha));
+    }//GEN-LAST:event_btnIrMouseClicked
     
     
     public static void main(String args[]) {
@@ -360,6 +340,7 @@ public class Recepcionista extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AgendaPanel;
+    private com.toedter.calendar.JCalendar Calendar1;
     private javax.swing.JLabel Fondo_Agenda;
     private javax.swing.JLabel Fondo_Pacientes;
     private javax.swing.JLabel Fondo_Pacientes1;
@@ -368,8 +349,6 @@ public class Recepcionista extends javax.swing.JFrame {
     private javax.swing.JTable Tabla;
     private javax.swing.JButton btnIr;
     private javax.swing.JComboBox<String> cmbPacientes;
-    private com.toedter.calendar.JCalendar jCalendar1;
-    private com.toedter.calendar.JCalendar jCalendar2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -391,55 +370,4 @@ public class Recepcionista extends javax.swing.JFrame {
     private javax.swing.JTabbedPane panel;
     private javax.swing.JTextField txtBusquedaAgenda;
     // End of variables declaration//GEN-END:variables
-
-    public void obtenerCitas(String fecha){
-        String hora="";
-        String paciente="";
-        String fechaAct="";
-        String doct="";
-        String horaArr [];
-        String pacienteArr [];
-        String fechaActArr [];
-        String doctArr [];
-        TableModel tableModel = Tabla.getModel();
-        tablaAgenda();
-        try{
-                 String query = "select hora, paciente, fecha, doctor from citas\n" +
-                "WHERE fecha= '"+ fecha +"' and estado = 1 ORDER BY hora";
-                 PreparedStatement st = cn.prepareStatement(query);
-                 ResultSet rs = st.executeQuery();
-                 while(rs.next()){
-                    hora += rs.getString("hora")+",";
-                    paciente+=rs.getString("paciente")+",";
-                    fechaAct+=rs.getString("fecha")+",";
-                    doct+=rs.getString("doctor")+",";
-                    }
-                 
-            }catch (SQLException ex){
-                    System.out.println(ex.getMessage());
-              }
-        horaArr=hora.split(",");
-        pacienteArr=paciente.split(",");
-        fechaActArr=fechaAct.split(",");
-        doctArr=doct.split(",");
-            for(int i=0;i<horaArr.length;i++){//i=filas
-                Object datos[]={horaArr[i], pacienteArr[i], fechaActArr[i], doctArr[i]};
-                modelo.addRow(datos);
-        }
-    }//obtenerCitas
-    
-    public void obtenerFecha(){
-        String date = jCalendar1.getDate()+"";
-        String meses[]={"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
-        String fecha[] = date.split(" ");
-        for(int i=0;i<meses.length;i++){
-            if(meses[i].equals(fecha[1])){
-                if((i+1)<10){
-                    date=fecha[5]+"-0"+(i+1)+"-"+fecha[2];
-                }else
-                date=fecha[5]+"-"+(i+1)+"-"+fecha[2];
-            }
-        }//for
-            obtenerCitas(date);
-    }//obtenerFecha
 }//class

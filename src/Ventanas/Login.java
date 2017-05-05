@@ -2,6 +2,7 @@ package Ventanas;
 
 import Clases.conectar;
 import com.mxrck.autocompleter.TextAutoCompleter;
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +16,7 @@ public class Login extends javax.swing.JFrame {
     String contraseña;
     conectar cc=new conectar();
     Connection cn=cc.conexion();
+    boolean estadoUsuario=false;
     public Login() {
         initComponents();
         setTitle("Login");
@@ -31,7 +33,7 @@ public void itemsUsuario(){
                  ResultSet rs = st.executeQuery();
                  while(rs.next()){
                     nombres += rs.getString("nombre")+" "+
-                           rs.getString("apellido_paterno")+",";
+                               rs.getString("apellido_paterno")+",";
                     }
             }catch (SQLException ex){
                     System.out.println(ex.getMessage());
@@ -89,7 +91,7 @@ public void itemsUsuario(){
         getContentPane().add(btnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, 90, 40));
 
         jLabel13.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel13.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Version 1.0", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(153, 153, 153)));
+        jLabel13.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Version 1.0", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153))); // NOI18N
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 470, 130));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -114,6 +116,9 @@ public void itemsUsuario(){
         jLabel2.setText("Contraseña");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
+        txtUsuario.setForeground(new java.awt.Color(204, 204, 204));
+        txtUsuario.setText("Primer nombre, apellido paterno");
+        txtUsuario.setToolTipText("");
         txtUsuario.setMinimumSize(new java.awt.Dimension(9, 25));
         txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -156,6 +161,12 @@ public void itemsUsuario(){
     }//GEN-LAST:event_btnEntrarMouseClicked
 
     private void txtUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyReleased
+        if(estadoUsuario==false){
+            estadoUsuario=true;
+            txtUsuario.setText(evt.getKeyChar()+"");
+            txtUsuario.setForeground(Color.black);
+            
+        }
         String temp = txtUsuario.getText();
         txtUsuario.setText(temp.toUpperCase());
     }//GEN-LAST:event_txtUsuarioKeyReleased

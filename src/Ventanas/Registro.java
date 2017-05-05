@@ -14,7 +14,9 @@ import Clases.conectar;
 import java.awt.HeadlessException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import javafx.scene.control.ComboBox;
+import Clases.RegistroClase;
+//ventana de registro inicial
 
 public class Registro extends javax.swing.JFrame {
     Usuarios usuarios;
@@ -28,6 +30,7 @@ public class Registro extends javax.swing.JFrame {
      //conexion
         conectar cc=new conectar();
         Connection cn=cc.conexion();
+        RegistroClase reg = new RegistroClase();
     
     public Registro() {
         initComponents();
@@ -175,48 +178,18 @@ public class Registro extends javax.swing.JFrame {
         apellidoMaterno=txtApMat.getText();
         Contraseña=pswContra1.getText();
         Contraseña2=pswContra2.getText();
-        
-        if(nombre.equals("")){
-            showMessageDialog(null, "Ingrese un nombre");
-            estado=false;
-            return;
-        }
-        if(apellidoPaterno.equals("")){
-            showMessageDialog(null, "Ingrese un apellido");
-            estado=false;
-            return;
-        }
-        if(Contraseña.equals("")||Contraseña2.equals("")){
-            showMessageDialog(null, "Ingrese una contraseña");
-            estado=false;
-            return;
-        }
-        if(!Contraseña.equals(Contraseña2)){
-                showMessageDialog(null, "Las contraseñas no coinciden");
-                estado=false;
-                return;
-            }
-        if(cmbUsuarios.getSelectedIndex()==0){
-            showMessageDialog(null, "Seleccione un tipo");
-            estado=false;
-            return;
-        }
-        
-        if((validarUsuario(nombre, segundoNombre, apellidoPaterno, apellidoMaterno))==true){
-             if(estado==true){
-                    insertar(tipo, nombre, segundoNombre, apellidoPaterno, apellidoMaterno, Contraseña);
-                    this.dispose();
-                    Login l = new Login();
-                     l.setVisible(true);
-                }else{
-                    showMessageDialog(null, "Error en los datos");
-                }
-        }
-        else{
-                showMessageDialog(null, "Registro duplicado");
-        }
-            
-                
+        int indice = cmbUsuarios.getSelectedIndex();
+        if(reg.validarCampos(tipo, nombre, segundoNombre, apellidoPaterno, 
+                apellidoMaterno, Contraseña, Contraseña2, indice)){
+            if(reg.validarUsuario(nombre, segundoNombre, apellidoPaterno, apellidoMaterno)){
+        reg.insertar(tipo,nombre,segundoNombre,apellidoPaterno,apellidoMaterno,
+                Contraseña);
+                Login l=new Login();
+                l.setVisible(true);
+                dispose();
+            }//validarUsuario
+            else{showMessageDialog(null,"Usuario duplicado");}
+        }//validarCampos          
     }//GEN-LAST:event_btnAceptarMouseClicked
 //mouseclicked
     
@@ -301,125 +274,4 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JTextField txtSegundoNombre;
     // End of variables declaration//GEN-END:variables
 
-    private void mostrardatos(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void insertar(String tipo_usuario,String nombre,String segundo_nombre,
-               String apellido_paterno,String apellido_materno,String contraseña){
-
-        String id = getRowNumber("usuarios")+1+"";   
-           try{
-               PreparedStatement pst=cn.prepareStatement("INSERT INTO usuarios"
-        + "(id_usuario,tipo_usuario ,nombre,segundo_nombre,apellido_paterno,"
-        + "apellido_materno,contraseña) VALUES(?,?,?,?,?,?,?)"); 
-               pst.setString(1,id);
-               pst.setString(2,tipo);
-               pst.setString(3,nombre);
-               pst.setString(4,segundoNombre);
-               pst.setString(5,apellidoPaterno);
-               pst.setString(6,apellidoMaterno);
-               pst.setString(7,Contraseña2);
-               
-        int a=pst.executeUpdate();
-         if(a>0){
-               showMessageDialog(null,"Registro exitoso");
-               insertarDoctor(id);
-               //mostrardatos("");
-           }
-           else{
-                showMessageDialog(null,"Error al agregar");
-           }
-           }catch(HeadlessException | SQLException e){
-           }   
-    }//insertar
- 
-    public int getRowNumber(String tabla){
-       int numberRow = 0;
-            try{
-                 String query = "select count(*) from "+tabla;
-                 PreparedStatement st = cn.prepareStatement(query);
-                 ResultSet rs = st.executeQuery();
-                 while(rs.next()){
-                   numberRow = rs.getInt("count(*)");
-                    }
-            }catch (SQLException ex){
-                    System.out.println(ex.getMessage());
-              }
-            return numberRow;
-    }//getRowNumber  
- 
-    
-    public boolean validarUsuario(String nombre,String segundo_nombre,
-               String apellido_paterno,String apellido_materno){
-        boolean estado = true;
-        String nombreTemp="";
-        String segNombre="";
-        String apPat="";
-        String apMat="";
-        try{
-           String query = "select * from usuarios";
-            PreparedStatement st = cn.prepareStatement(query);
-            ResultSet rs = st.executeQuery();
-            
-            while(rs.next()){
-                nombreTemp+=rs.getString("nombre")+",";
-                segNombre+=rs.getString("segundo_nombre")+",";
-                apPat+=rs.getString("apellido_paterno")+",";
-                apMat+=rs.getString("apellido_materno")+",";
-            }//while
-            String nombres[]=nombreTemp.split(",");
-            String segundonombre[]=segNombre.split(",");
-            String apPaterno[]=apPat.split(",");
-            String apMaterno []=apMat.split(",");
-            for(int i=0;i<nombres.length;i++){
-                if(nombres[i].equals(nombre)&&
-                        segundonombre[i].equals(segundo_nombre)&&
-                        apPaterno[i].equals(apellido_paterno)&&
-                        apMaterno[i].equals(apellido_materno)){
-                estado=false;
-                }
-            }
-       }//try
-       catch(SQLException ex){
-            System.out.println(ex.getMessage());
-       }
-        return estado;
-    }//validarUsuario
-    
-public void insertarDoctor(String id_usuario){
-    String id_doctor = getRowNumber("doctor")+1+"";
-    try{
-               PreparedStatement pst=cn.prepareStatement("INSERT INTO doctor"
-        + "(id_usuario,id_doctor,domicilio ,ciudad,estado,"
-        + "codigo_postal,tel_domicilio,tel_oficina,tel_movil,tel_extra,"
-         + "correo_electronico,cedula_profecional,especialidad,observaciones) "
-                       + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)"); 
-               pst.setString(1,id_usuario);
-               pst.setString(2,id_doctor);
-               pst.setString(3,null);
-               pst.setString(4,null);
-               pst.setString(5,null);
-               pst.setString(6,null);
-               pst.setString(7,null);
-               pst.setString(8,null);
-               pst.setString(9,null);
-               pst.setString(10,null);
-               pst.setString(11,null);
-               pst.setString(12,null);
-               pst.setString(13,null);
-               pst.setString(14,null);
-        int a=pst.executeUpdate();
-         if(a>0){
-               showMessageDialog(null,"Registro de doctor creado");
-                //mostrardatos("");
-           }
-           else{
-                showMessageDialog(null,"Error al agregar");
-           }
-           }catch(HeadlessException | SQLException e){
-           }  
-}//insertarDoctor
-        
-        
-}//class
+}//clase

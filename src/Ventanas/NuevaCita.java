@@ -6,8 +6,17 @@
 package Ventanas;
 
 //fecha   hora  paciente  doctor estado 
-public class NuevaCita extends javax.swing.JFrame {
 
+import Clases.CitasClase;
+import Clases.conectar;
+import com.toedter.calendar.JDateChooser;
+import java.sql.Connection;
+import static javax.swing.JOptionPane.showMessageDialog;
+
+public class NuevaCita extends javax.swing.JFrame {
+    conectar cc=new conectar();
+    Connection cn=cc.conexion();
+    CitasClase c = new CitasClase();
     /**
      * Creates new form NuevaCita
      */
@@ -15,6 +24,8 @@ public class NuevaCita extends javax.swing.JFrame {
         initComponents();
         setTitle("Agregar cita");
         setLocationRelativeTo(null);
+        c.obtenerDoctor(txtDoctor);
+        c.obtenerPacientes(txtPaciente);
     }
 
     /**
@@ -30,13 +41,13 @@ public class NuevaCita extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        lblCancelar = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        lblAceptar = new javax.swing.JLabel();
         txtHora = new javax.swing.JTextField();
         txtPaciente = new javax.swing.JTextField();
         txtDoctor = new javax.swing.JTextField();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        DateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -57,27 +68,32 @@ public class NuevaCita extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 102, 153));
         jPanel2.setForeground(new java.awt.Color(0, 102, 153));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar_32.png"))); // NOI18N
-        jLabel6.setText("Cancelar");
-        jPanel2.add(jLabel6);
+        lblCancelar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        lblCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cancelar_32.png"))); // NOI18N
+        lblCancelar.setText("Cancelar");
+        jPanel2.add(lblCancelar);
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 100, 40));
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 153));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Aceptar_32.png"))); // NOI18N
-        jLabel5.setText("Aceptar");
-        jPanel1.add(jLabel5);
+        lblAceptar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblAceptar.setForeground(new java.awt.Color(255, 255, 255));
+        lblAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Aceptar_32.png"))); // NOI18N
+        lblAceptar.setText("Aceptar");
+        lblAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAceptarMouseClicked(evt);
+            }
+        });
+        jPanel1.add(lblAceptar);
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 100, 40));
         getContentPane().add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 278, -1));
         getContentPane().add(txtPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 278, -1));
         getContentPane().add(txtDoctor, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 278, -1));
-        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
+        getContentPane().add(DateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
 
         jLabel4.setText("Fecha");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, 20));
@@ -94,11 +110,6 @@ public class NuevaCita extends javax.swing.JFrame {
         jLabel7.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jLabel7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel7MouseClicked(evt);
-            }
-        });
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Menu Azul.png"))); // NOI18N
@@ -107,9 +118,13 @@ public class NuevaCita extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-        new NuevaCita().setVisible(true);
-    }//GEN-LAST:event_jLabel7MouseClicked
+    private void lblAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAceptarMouseClicked
+    /*String fecha, String hora, int id_paciente, int id_doctor*/
+
+       c.insertarCita(c.obtenerFecha(DateChooser1),txtHora.getText(),
+               c.obtenerIdPaciente(txtPaciente.getText()),
+               c.obtenerIdMedico(txtDoctor.getText()));
+    }//GEN-LAST:event_lblAceptarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -147,20 +162,20 @@ public class NuevaCita extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser DateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblAceptar;
+    private javax.swing.JLabel lblCancelar;
     private javax.swing.JTextField txtDoctor;
     private javax.swing.JTextField txtHora;
     private javax.swing.JTextField txtPaciente;
     // End of variables declaration//GEN-END:variables
-}
+}//clase

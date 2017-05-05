@@ -5,7 +5,10 @@
  */
 package Ventanas;
 
+import Clases.Paciente;
 import Clases.conectar;
+import com.mxrck.autocompleter.TextAutoCompleter;
+import java.awt.Color;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.ComboBox;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
@@ -21,8 +25,9 @@ import static javax.swing.JOptionPane.showMessageDialog;
  */
 public class AgregarPacienteR extends javax.swing.JFrame {
 //conexion
-        conectar cc=new conectar();
-        Connection cn=cc.conexion();
+        Paciente p = new Paciente();
+        boolean estFec = false;
+        boolean estDer=false;
     /**
      * Creates new form AgregarPacienteR
      */
@@ -30,7 +35,7 @@ public class AgregarPacienteR extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Agregar Paciente");
-        
+        cmbMedico.setModel(p.obtenerDoctor());
     }
 
     /**
@@ -73,10 +78,10 @@ public class AgregarPacienteR extends javax.swing.JFrame {
         txtCorreo = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
         txtDerechohabiente = new javax.swing.JTextField();
-        txtFechaNac = new javax.swing.JTextField();
+        txtRFC = new javax.swing.JTextField();
         txtEdad = new javax.swing.JTextField();
         txtLugarNac1 = new javax.swing.JTextField();
-        txtRFC = new javax.swing.JTextField();
+        txtFechaNac = new javax.swing.JTextField();
         txtEstadoCivil = new javax.swing.JTextField();
         cmbSexo = new javax.swing.JComboBox();
         jLabel24 = new javax.swing.JLabel();
@@ -100,7 +105,7 @@ public class AgregarPacienteR extends javax.swing.JFrame {
         txtEscolaridad = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtaObservaciones = new javax.swing.JTextArea();
         jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -112,106 +117,199 @@ public class AgregarPacienteR extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, -1));
         getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 970, 10));
 
-        jLabel2.setText("Nombre(s)");
+        jLabel2.setText("* Nombre(s)");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, -1, -1));
 
-        jLabel3.setText("Apellidos");
+        jLabel3.setText("* Apellidos");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, -1, -1));
 
-        jLabel4.setText("Domicilio");
+        jLabel4.setText("* Domicilio");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, -1, -1));
 
-        jLabel5.setText("Ciudad");
+        jLabel5.setText("* Ciudad");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, -1, -1));
 
-        jLabel6.setText("Estado");
+        jLabel6.setText("* Estado");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, -1, -1));
 
-        jLabel7.setText("Codigo Postal");
+        jLabel7.setText("* Codigo Postal");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, -1, -1));
 
         txtNExpediente.setEditable(false);
         getContentPane().add(txtNExpediente, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 110, -1));
 
-        txtSNombre.setText(" ");
+        txtSNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSNombreKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtSNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 150, 120, -1));
 
-        txtPNombre.setText(" ");
+        txtPNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPNombreKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtPNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 110, -1));
 
-        txtApeMat.setText(" ");
+        txtApeMat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtApeMatKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtApeMat, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 120, -1));
 
-        txtApePat.setText(" ");
+        txtApePat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtApePatKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtApePat, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 110, -1));
 
-        txtCiudad.setText(" ");
+        txtCiudad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCiudadKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 240, -1));
 
-        txtCodigoPostal.setText(" ");
+        txtCodigoPostal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCodigoPostalKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtCodigoPostal, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, 120, -1));
 
-        txtEstado.setText(" ");
+        txtEstado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtEstadoKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, 240, -1));
 
         txtDomicilio.setColumns(20);
         txtDomicilio.setRows(5);
+        txtDomicilio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDomicilioKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtDomicilio);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 240, 68));
 
-        jLabel8.setText("Teléfono Dom");
+        jLabel8.setText("* Teléfono Dom");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, -1, -1));
 
-        jLabel9.setText("Telefono Oficina");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, -1, -1));
+        jLabel9.setText("* Telefono Oficina");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, -1, -1));
 
         jLabel10.setText("Correo electronico");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 150, -1, -1));
 
-        jLabel11.setText("Sexo");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 180, -1, -1));
+        jLabel11.setText("* Sexo");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 180, -1, -1));
 
         jLabel12.setText("Derechohabiente");
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 210, -1, -1));
 
-        jLabel13.setText("Fecha de Nacimiento");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, -1, -1));
+        jLabel13.setText("* Fecha de Nacimiento");
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 270, -1, -1));
 
-        jLabel14.setText("Edad");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, -1, -1));
+        jLabel14.setText("* Edad");
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 300, -1, -1));
 
-        jLabel15.setText("Medico");
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 330, -1, -1));
+        jLabel15.setText("* Medico");
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 330, -1, -1));
+
+        txtTelDom.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTelDomKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtTelDom, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 380, 159, -1));
+
+        txtTelOfi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTelOfiKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtTelOfi, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, 159, -1));
+
+        txtCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCorreoKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 150, 160, -1));
 
-        jLabel23.setText("Lugar de Nacimiento");
-        getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 240, -1, -1));
-        getContentPane().add(txtDerechohabiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 210, 158, -1));
-        getContentPane().add(txtFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, 158, -1));
-        getContentPane().add(txtEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, 75, -1));
-        getContentPane().add(txtLugarNac1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, 158, -1));
-        getContentPane().add(txtRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 158, -1));
+        jLabel23.setText("* Lugar de Nacimiento");
+        getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, -1, -1));
 
-        txtEstadoCivil.setText(" ");
+        txtDerechohabiente.setForeground(new java.awt.Color(204, 204, 204));
+        txtDerechohabiente.setText("ISSSTE, IMSS, ETC");
+        txtDerechohabiente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDerechohabienteKeyReleased(evt);
+            }
+        });
+        getContentPane().add(txtDerechohabiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 210, 158, -1));
+
+        txtRFC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtRFCKeyReleased(evt);
+            }
+        });
+        getContentPane().add(txtRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, 158, -1));
+
+        txtEdad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtEdadKeyReleased(evt);
+            }
+        });
+        getContentPane().add(txtEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, 75, -1));
+
+        txtLugarNac1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtLugarNac1KeyReleased(evt);
+            }
+        });
+        getContentPane().add(txtLugarNac1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, 158, -1));
+
+        txtFechaNac.setForeground(new java.awt.Color(204, 204, 204));
+        txtFechaNac.setText("aaaa-mm-dd");
+        txtFechaNac.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFechaNacKeyReleased(evt);
+            }
+        });
+        getContentPane().add(txtFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 158, -1));
+
+        txtEstadoCivil.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtEstadoCivilKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 430, 240, -1));
 
-        cmbSexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione una opcion", "Hombre", "Mujer" }));
+        cmbSexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione una opcion", "HOMBRE", "MUJER" }));
         getContentPane().add(cmbSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 180, 160, -1));
 
         jLabel24.setText("RFC");
         getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 360, -1, -1));
 
-        cmbMedico.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(cmbMedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 330, 136, -1));
+        getContentPane().add(cmbMedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 330, 170, -1));
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 110, 14, 300));
 
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar_paciente.png"))); // NOI18N
         btnAgregar.setText("jButton1");
+        btnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAgregarMouseClicked(evt);
+            }
+        });
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
@@ -243,32 +341,65 @@ public class AgregarPacienteR extends javax.swing.JFrame {
         jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Menu Azul.png"))); // NOI18N
         getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, -1));
 
-        txtNombrePadre.setText(" ");
+        txtNombrePadre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNombrePadreKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtNombrePadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 490, 240, -1));
 
-        txtNombreMadre.setText(" ");
+        txtNombreMadre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNombreMadreKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtNombreMadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 460, 240, -1));
 
-        txtNombrePareja.setText(" ");
+        txtNombrePareja.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNombreParejaKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtNombrePareja, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 520, 240, -1));
 
-        txtProcedencia.setText(" ");
+        txtProcedencia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtProcedenciaKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtProcedencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 550, 240, -1));
 
         jLabel25.setText("Estado Civil");
         getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, -1, -1));
+
+        txtOcupacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtOcupacionKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtOcupacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 430, 230, -1));
 
         jLabel26.setText("Escolaridad");
         getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 460, -1, -1));
+
+        txtEscolaridad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtEscolaridadKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtEscolaridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 460, 230, -1));
 
         jLabel27.setText("Observaciones");
         getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 490, -1, -1));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        txtaObservaciones.setColumns(20);
+        txtaObservaciones.setRows(5);
+        txtaObservaciones.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtaObservacionesKeyReleased(evt);
+            }
+        });
+        jScrollPane2.setViewportView(txtaObservaciones);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 490, 230, 80));
 
@@ -280,25 +411,7 @@ public class AgregarPacienteR extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-       try{
-            int NumExpediente= Integer.parseInt(txtNExpediente.getText());
-            String primer_nom = txtPNombre.getText();
-            String segundo_nom = txtSNombre.getText();
-            String ape_pat = txtApePat.getText();
-            String ape_mat = txtApeMat.getText();
-            String domicilio = txtDomicilio.getText();
-            String ciudad = txtCiudad.getText();
-            String estado = txtEstado.getText();
-            String Tel_Dom = txtTelDom.getText();
-            String Tel_Ofi = txtTelOfi.getText();
-            String correo = txtCorreo.getText();
-            String sexo = cmbSexo.getSelectedItem().toString();
-            String Lug_Nac = txtDerechohabiente.getText();
-            String Fec_Nac = txtFechaNac.getText();
-            int edad = Integer.parseInt(txtEdad.getText());
-            String medico = cmbMedico.getSelectedItem().toString();
-       
-       if(validarCampos(primer_nom,ape_pat,domicilio, ciudad,estado,Tel_Dom,
+      /* if(validarCampos(primer_nom,ape_pat,domicilio, ciudad,estado,Tel_Dom,
                sexo,Lug_Nac,Fec_Nac,2,medico)==true){
            showMessageDialog(null, "se puede insertar");
        }else{
@@ -307,106 +420,159 @@ public class AgregarPacienteR extends javax.swing.JFrame {
        }
        catch(java.lang.NumberFormatException ex){
            showMessageDialog(null, "Ingrese Edad ");
-       }
-              
+       }*/      
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    public boolean validarCampos(String nom,String apePat,String domicilio,
-                String ciudad, String estado,String telDom,String sexo,
-                String LugNac,String FechaNac,int edad, String medico){
-    
-        if(nom.equals("")){
-            showMessageDialog(null, "Ingrese el nombre");
-            return false;
-        }
-        if(apePat.equals("")){
-            showMessageDialog(null, "Ingrese un apellido");
-            return false;
-        }
-        if(domicilio.equals("")){
-            showMessageDialog(null, "Ingrese un domicilio");
-            return false;
-        }
-        if(ciudad.equals("")){
-            showMessageDialog(null, "Ingrese un ciudad");
-            return false;
-        }
-        if(estado.equals("")){
-            showMessageDialog(null, "Ingrese un estado");
-            return false;
-        }
-        if(telDom.equals("")){
-            showMessageDialog(null, "Ingrese el telefono de domicilio");
-            return false;
-        }
-        if(sexo.equals("")){
-            showMessageDialog(null, "Ingrese el sexo");
-            return false;
-        }
-        if(LugNac.equals("")){
-            showMessageDialog(null, "Ingrese el Lugar de Naciemiento");
-            return false;
-        }
-        if(FechaNac.equals("")){
-            showMessageDialog(null, "Ingrese la Fecha de Nacimiento");
-            return false;
-        }
-        if(edad<0){
-            showMessageDialog(null, "Ingrese la edad");
-            return false;
-        }
-        if(medico.equals("")){
-            showMessageDialog(null, "Seleccione al medico");
-            return false;
-        }
-        
-        return true;
-        
-    }
-    
-    public void insertarP(int id_Exp,String nom,String seg_nom,String apePat,
-                            String apeMat,String domicilio,String ciudad,
-                            String estado,String telDom,String telOfi,
-                            String correo,String sexo,String LugNac,
-                            String FechaNac,int edad, String medico){
-        String idPaciente = getRowNumber()+"";
+    private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
         try{
-            PreparedStatement pst = cn.prepareStatement("INSERT INTO paciente(id_paciente,"
-                    + "nombre,segundo_nombre,apellido_paterno,"
-                    + "apelledo_materno,domicilio,ciudad,estado,codigo_postal,tel_domicilio,"
-                    + "tel_oficina,correo_electronico,sexo,"+
-                    "derechohabiente,lugar_nacimiento,fecha_nacimiento,edad,rfc,"+
-                    "estado_civil,nombre_madre,nombre_padre,nombre_pareja,procedencia,ocupacion,"+
-                    "escolaridad,observaciones,id_doctor)"
-                    + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-            pst.setString(1,idPaciente);
-            pst.setString(2,id_Exp+"");
-            pst.setString(3,nom);
-            pst.setString(4,seg_nom);
-            pst.setString(5, medico);
-           
-        } 
-        
-        catch(HeadlessException e){} catch (SQLException ex) {
-                Logger.getLogger(AgregarPacienteR.class.getName()).log(Level.SEVERE, null, ex);
+        String nombre = txtPNombre.getText();
+        String segundo_nombre = txtSNombre.getText();
+        String apellido_paterno = txtApePat.getText();
+        String apellido_materno = txtApeMat.getText();
+        String domicilio = txtDomicilio.getText();
+        String ciudad = txtCiudad.getText();
+        String estado = txtEstado.getText();
+        String codigo_postal = txtCodigoPostal.getText();
+        String tel_domicilio = txtTelDom.getText();
+        String tel_oficina = txtTelOfi.getText();
+        String correo_electronico = txtCorreo.getText();
+        String sexo = cmbSexo.getSelectedItem().toString();
+        String derechohabiente = txtDerechohabiente.getText();
+        String lugar_nacimiento = txtLugarNac1.getText();
+        String fecha_nacimiento = txtFechaNac.getText();
+        String edad = txtEdad.getText();
+        String rfc = txtRFC.getText();
+        String estado_civil = txtEstadoCivil.getText();
+        String nombre_madre = txtNombreMadre.getText();
+        String nombre_padre = txtNombrePadre.getText();
+        String nombre_pareja = txtNombrePareja.getText();
+        String procedencia = txtProcedencia.getText();
+        String ocupacion = txtOcupacion.getText();
+        String escolaridad = txtEscolaridad.getText();
+        String observaciones = txtaObservaciones.getText();
+        String doctor = cmbMedico.getSelectedItem().toString();
+        if(p.validarCampos(nombre, apellido_paterno, domicilio, ciudad, estado, 
+                tel_domicilio, tel_oficina, cmbSexo.getSelectedIndex(), lugar_nacimiento, 
+                fecha_nacimiento, edad, cmbMedico.getSelectedIndex())){
+            if(p.insertarP(nombre, segundo_nombre, apellido_paterno, apellido_materno, 
+           domicilio, ciudad, estado, codigo_postal, tel_domicilio, tel_oficina, 
+           correo_electronico, sexo, derechohabiente, lugar_nacimiento, 
+           fecha_nacimiento, edad, rfc, estado_civil, nombre_madre, nombre_padre, 
+           nombre_pareja, procedencia, ocupacion, escolaridad, observaciones, doctor)){
+            dispose();
             }
-    }
-    
-    public int getRowNumber(){
-       int numberRow = 0;
-            try{
-                 String query = "select count(*) from PACIENTE ";
-                 PreparedStatement st = cn.prepareStatement(query);
-                 ResultSet rs = st.executeQuery();
-                 while(rs.next()){
-                   numberRow = rs.getInt("count(*)");
-                    }
-            }catch (SQLException ex){
-                    System.out.println(ex.getMessage());
-              }
-            return numberRow;
-    }//getRowNumber  
-    
+           
+        }//insertarP
+        }//if validarCampos
+        catch(NumberFormatException e){showMessageDialog(null, e.getMessage());}
+    }//GEN-LAST:event_btnAgregarMouseClicked
+
+    private void txtPNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPNombreKeyReleased
+        txtPNombre.setText(txtPNombre.getText().toUpperCase());
+    }//GEN-LAST:event_txtPNombreKeyReleased
+
+    private void txtSNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSNombreKeyReleased
+        txtSNombre.setText(txtSNombre.getText().toUpperCase());
+    }//GEN-LAST:event_txtSNombreKeyReleased
+
+    private void txtApePatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApePatKeyReleased
+        txtApePat.setText(txtApePat.getText().toUpperCase());
+    }//GEN-LAST:event_txtApePatKeyReleased
+
+    private void txtApeMatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApeMatKeyReleased
+        txtApeMat.setText(txtApeMat.getText().toUpperCase());
+    }//GEN-LAST:event_txtApeMatKeyReleased
+
+    private void txtDomicilioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDomicilioKeyReleased
+        txtDomicilio.setText(txtDomicilio.getText().toUpperCase());
+    }//GEN-LAST:event_txtDomicilioKeyReleased
+
+    private void txtCiudadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCiudadKeyReleased
+        txtCiudad.setText(txtCiudad.getText().toUpperCase());
+    }//GEN-LAST:event_txtCiudadKeyReleased
+
+    private void txtEstadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEstadoKeyReleased
+        txtEstado.setText(txtEstado.getText().toUpperCase());
+    }//GEN-LAST:event_txtEstadoKeyReleased
+
+    private void txtCodigoPostalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoPostalKeyReleased
+        p.soloNumeros(evt);
+    }//GEN-LAST:event_txtCodigoPostalKeyReleased
+
+    private void txtTelDomKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelDomKeyReleased
+        p.validarTelefono(evt);
+    }//GEN-LAST:event_txtTelDomKeyReleased
+
+    private void txtEstadoCivilKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEstadoCivilKeyReleased
+        txtEstadoCivil.setText(txtEstadoCivil.getText().toUpperCase());
+    }//GEN-LAST:event_txtEstadoCivilKeyReleased
+
+    private void txtNombreMadreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreMadreKeyReleased
+        txtNombreMadre.setText(txtNombreMadre.getText().toUpperCase());
+    }//GEN-LAST:event_txtNombreMadreKeyReleased
+
+    private void txtNombrePadreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombrePadreKeyReleased
+        txtNombrePadre.setText(txtNombrePadre.getText().toUpperCase());
+    }//GEN-LAST:event_txtNombrePadreKeyReleased
+
+    private void txtNombreParejaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreParejaKeyReleased
+        txtNombrePareja.setText(txtNombrePareja.getText().toUpperCase());
+    }//GEN-LAST:event_txtNombreParejaKeyReleased
+
+    private void txtProcedenciaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProcedenciaKeyReleased
+        txtProcedencia.setText(txtProcedencia.getText().toUpperCase());
+    }//GEN-LAST:event_txtProcedenciaKeyReleased
+
+    private void txtTelOfiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelOfiKeyReleased
+        txtTelOfi.setText(txtTelOfi.getText().toUpperCase());
+    }//GEN-LAST:event_txtTelOfiKeyReleased
+
+    private void txtCorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyReleased
+        txtCorreo.setText(txtCorreo.getText().toUpperCase());
+    }//GEN-LAST:event_txtCorreoKeyReleased
+
+    private void txtDerechohabienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDerechohabienteKeyReleased
+        if(estDer==false){
+            estDer=true;
+            txtDerechohabiente.setForeground(Color.black);
+            txtDerechohabiente.setText(evt.getKeyChar()+"");
+        }
+        txtDerechohabiente.setText(txtDerechohabiente.getText().toUpperCase());
+    }//GEN-LAST:event_txtDerechohabienteKeyReleased
+
+    private void txtLugarNac1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLugarNac1KeyReleased
+        txtLugarNac1.setText(txtLugarNac1.getText().toUpperCase());
+    }//GEN-LAST:event_txtLugarNac1KeyReleased
+
+    private void txtFechaNacKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaNacKeyReleased
+        if(estFec==false){
+            estFec=true;
+            txtFechaNac.setForeground(Color.black);
+            txtFechaNac.setText(evt.getKeyChar()+"");
+        }
+        txtFechaNac.setText(txtFechaNac.getText().toUpperCase());
+    }//GEN-LAST:event_txtFechaNacKeyReleased
+
+    private void txtEdadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEdadKeyReleased
+        p.soloNumeros(evt);
+    }//GEN-LAST:event_txtEdadKeyReleased
+
+    private void txtRFCKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyReleased
+        txtRFC.setText(txtRFC.getText().toUpperCase());
+    }//GEN-LAST:event_txtRFCKeyReleased
+
+    private void txtOcupacionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtOcupacionKeyReleased
+        txtOcupacion.setText(txtOcupacion.getText().toUpperCase());
+    }//GEN-LAST:event_txtOcupacionKeyReleased
+
+    private void txtEscolaridadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEscolaridadKeyReleased
+        txtEscolaridad.setText(txtEscolaridad.getText().toUpperCase());
+    }//GEN-LAST:event_txtEscolaridadKeyReleased
+
+    private void txtaObservacionesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtaObservacionesKeyReleased
+        txtaObservaciones.setText(txtaObservaciones.getText().toUpperCase());
+    }//GEN-LAST:event_txtaObservacionesKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -441,7 +607,6 @@ public class AgregarPacienteR extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JComboBox cmbMedico;
@@ -477,7 +642,6 @@ public class AgregarPacienteR extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblPacientes;
     private javax.swing.JTextField txtApeMat;
     private javax.swing.JTextField txtApePat;
@@ -503,5 +667,6 @@ public class AgregarPacienteR extends javax.swing.JFrame {
     private javax.swing.JTextField txtSNombre;
     private javax.swing.JTextField txtTelDom;
     private javax.swing.JTextField txtTelOfi;
+    private javax.swing.JTextArea txtaObservaciones;
     // End of variables declaration//GEN-END:variables
-}
+}//clase
